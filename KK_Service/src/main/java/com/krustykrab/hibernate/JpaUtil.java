@@ -3,6 +3,10 @@
  */
 package com.krustykrab.hibernate;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,11 +19,18 @@ public class JpaUtil
 {
 	private static EntityManagerFactory emf;
 	private static final ThreadLocal<EntityManager> manager = new ThreadLocal<EntityManager>();
-
+	private static final String PROPS_FILENAME = "hibernate.properties";
 	
 	private static void initializeEmf()
 	{
-		emf = Persistence.createEntityManagerFactory("PersistenceUnit");
+		Properties props = new Properties();
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(PROPS_FILENAME);
+		try {
+			props.load(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		emf = Persistence.createEntityManagerFactory("PersistenceUnit", props);
 	}
 	
 	public static EntityManagerFactory getEmf()
