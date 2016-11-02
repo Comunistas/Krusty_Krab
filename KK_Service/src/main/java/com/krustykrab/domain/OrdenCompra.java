@@ -40,6 +40,6 @@ public class OrdenCompra implements DomainClass
 	private Date fecha;
 	private char estado;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="ordenCompra")
 	private List<OrdenCompra_Insumo> detalle;
 }

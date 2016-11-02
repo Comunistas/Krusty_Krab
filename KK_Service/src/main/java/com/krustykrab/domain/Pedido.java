@@ -45,6 +45,6 @@ public class Pedido implements DomainClass
 	private String direccion;
 	private Date fecha;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pedido")
 	private List<Plato_Pedido> detalle;
 }

@@ -33,6 +33,6 @@ public class Plato implements DomainClass
 	private int cantidadStockDiario;
 	private int stockActual;
 	
-	@OneToMany
+	@OneToMany(mappedBy="plato")
 	private List<Insumo_Plato> insumos;
 }
