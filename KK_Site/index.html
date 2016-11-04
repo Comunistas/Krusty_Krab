@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS template</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+</head>
+<body ng-controller="helloController">
+	<h1 class="danger">{{hello}}</h1>
+	<input type="text" name="helloText" ng-model="hello" class="col-lg-4 col-md-4 form-control">
+
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-2.2.0.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/hello-controller.js"></script>
+</body>
+</html>
