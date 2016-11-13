@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.krustykrab.domain;
+package com.krustykrab.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -16,14 +16,15 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 @Entity
-@Table
-public class Insumo implements DomainClass
+public class Proveedor
 {
-	private static final long serialVersionUID = 276403073135597034L;
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	private String descripcion;
-	private char unidadMedida;
+	private Long id;
+	private String ruc;
+	private String razonSocial;
+	private String telefono;
+	private String direccion;
 }

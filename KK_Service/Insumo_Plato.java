@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.krustykrab.domain;
+package com.krustykrab.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -15,13 +15,12 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 @Entity
-@Table
-public class Insumo_Plato implements DomainClass
+public class Insumo_Plato
 {	
-	private static final long serialVersionUID = 7666323367903515842L;
 	
-	@Id private int id;
+	@Id private Long id;
 	@ManyToOne private Insumo insumo;
 	@ManyToOne private Plato plato;
 	private int cantidad;
