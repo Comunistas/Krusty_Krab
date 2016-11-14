@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.krustykrab.domain;
+package com.krustykrab.model.entities;
 
 import java.util.Date;
 
@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -19,14 +19,13 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 @Entity
-@Table	
-public class ComprobantePago implements DomainClass
+public class ComprobantePago
 {
-	private static final long serialVersionUID = -2425163719227038840L;
 	
 	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@ManyToOne
 	private Pedido pedido;

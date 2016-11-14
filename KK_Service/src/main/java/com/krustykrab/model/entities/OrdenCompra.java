@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.krustykrab.domain;
+package com.krustykrab.model.entities;
 
 import java.util.Date;
 import java.util.List;
@@ -13,8 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -22,14 +22,13 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 @Entity
-@Table
-public class OrdenCompra implements DomainClass
+public class OrdenCompra
 {
-	private static final long serialVersionUID = -2081854833243400848L;
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@ManyToOne
 	private Empleado empleado;

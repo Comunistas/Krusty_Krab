@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.krustykrab.domain;
+package com.krustykrab.model.entities;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -19,14 +19,13 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 @Entity
-@Table
-public class Plato implements DomainClass
+public class Plato
 {
-	private static final long serialVersionUID = 2373341920455020952L;
 	
 	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	private String nombre;
 	private String descripcion;
 	private double precio;
