@@ -37,23 +37,27 @@ app.controller('navCtrl',
 app.controller('homeCtrl', [
 	'$scope', '$routeParams',
 	function($scope, $routeParams){
-		$scope.err = $routeParams.err == 'undefined' ? '': $routeParams.err;
+		$scope.err = $routeParams.err;
 	}]);
 
 app.controller('loginCtrl', 
-	['$scope', '$location','LoginService',
-	function($scope, $location, LoginService){
+	['$scope', '$location','LoginService', 'currentUserService',
+	function($scope, $location, LoginService, currentUserService){
 		$scope.user = {};
 		var user = $scope.user;
 
 		var err = "Error logging in."
 
-		function success(){
-			$location.path('/authenticated');
+		function success(userResponse){
+			if(userResponse.authenticated){
+				currentUserService.setUser(userResponse.usuario)
+				$location.path('/authenticated');
+			}else{
+				$location.path('/').search({err: err});
+			}
 		}
 
-		function error(){
-			console.log('I\'m on error.')
+		function error(data){
 			$location.path('/').search({err: err});
 		}
 
@@ -62,4 +66,10 @@ app.controller('loginCtrl',
 		}
 
 		$scope.validate = authenticate
+	}]);
+
+app.controller('welcomeCtrl', 
+	['$route', 'currentUserService', 
+	function($route, currentUserService){ 
+		$route.user = currentUserService.getUser();
 	}]);

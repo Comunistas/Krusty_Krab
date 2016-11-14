@@ -5,9 +5,11 @@ app.config(routeConfig);
 function routeConfig($routeProvider){
 	$routeProvider
 		.when('/', {
-			templateUrl: 'views/home.html'
+			templateUrl: 'views/home.html',
+			controller: 'homeCtrl'
 		})
 		.when('/authenticated',{
-			templateUrl: 'views/welcome.html'
+			templateUrl: 'views/welcome.html',
+			controller: 'welcomeCtrl'
 		});
 }
