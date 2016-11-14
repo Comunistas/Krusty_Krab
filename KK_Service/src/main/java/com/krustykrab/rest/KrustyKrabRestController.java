@@ -29,6 +29,12 @@ public class KrustyKrabRestController {
 	}
 	
 	
+	@PostMapping("/usuarios")
+	public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario usuario) {
+		return null;
+	}
+	
+	
 	@PostMapping("/usuarios/login")
 	public ResponseEntity<KrustyKrabValidarUsuarioResponse> validarUsuario(@RequestBody Usuario usuario) {
 		KrustyKrabValidarUsuarioResponse response = service.validarUsuario(usuario);
@@ -44,6 +50,7 @@ public class KrustyKrabRestController {
 		ResponseEntity<List<Cliente>> responseEntity = new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
         return responseEntity;
     }
+	
 	
 	@PostMapping("/clientes")
 	public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente cliente) {
