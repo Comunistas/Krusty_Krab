@@ -1,18 +1,62 @@
 <!DOCTYPE html>
-<html ng-app="appModule">
+<html>
 <head>
 	<meta charset="utf-8">
-	<title>AngularJS template</title>
+	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 </head>
-<body ng-controller="helloController">
-	<h1 class="danger">{{hello}}</h1>
-	<input type="text" name="helloText" ng-model="hello" class="col-lg-4 col-md-4 form-control">
+<body ng-app="appModule">
 
+	<div ng-controller="bodyCtrl">
+
+		<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="navCtrl">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Krusty Krab</a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	            <li ng-class="{active:pages.home}" ng-click="setActive('home')"><a href="#">Home</a></li>
+	            <li ng-class="{active:pages.about}" ng-click="setActive('about')"><a href="#about">About</a></li>
+	            <li ng-class="{active:pages.contact}" ng-click="setActive('contact')"><a href="#contact">Contact</a></li>
+	          </ul>
+	          <form class="navbar-form navbar-right" ng-controller="loginCtrl">
+	            <div class="form-group">
+	              <input type="text" placeholder="usuario" class="form-control" ng-model="user.usuario">
+	            </div>
+	            <div class="form-group">
+	              <input type="password" placeholder="password" class="form-control" ng-model="user.password">
+	            </div>
+	            <button type="submit" class="btn btn-success">Sign in</button>
+	          </form>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+
+	    <div class="content">
+	    	<ng-view></ng-view>
+	    </div>
+
+
+	</div>
+
+
+	<!-- -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-resource.min.js"></script>
+ 	<script type="text/javascript" src="js/angular-route.min.js"></script>
+
 	<script type="text/javascript" src="js/ui-bootstrap-tpls-2.2.0.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
-	<script type="text/javascript" src="js/controllers/hello-controller.js"></script>
+
+	<script type="text/javascript" src="js/angular/services/generic-services.js"></script>
+	<script type="text/javascript" src="js/angular/controllers/generic-controllers.js"></script>
 </body>
 </html>
