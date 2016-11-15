@@ -1,75 +1,131 @@
 app.controller('bodyCtrl', 
 	['$scope','TitleService', 
-	function($scope, TitleService){
-		TitleService.setTitle('ma New Title');
+	function ($scope, TitleService) {
+		TitleService.setTitle('ma New Title')
 
 		//Service to change the title of the page
-		$scope.setTitle = TitleService.setTitle;
-	}]);
+		$scope.setTitle = TitleService.setTitle
+	}])
 
 app.controller('navCtrl',
-	['$scope', 
-	function($scope){
+	['$scope','$rootScope','TitleService',
+	function ($scope, $rootScope, TitleService) {
+
+		// 'v' - visitor, 'e' - employee, 'c' - client
+		$rootScope.role = 'v'
+
+		$rootScope.$watch('role', function (newVal, oldVal) {
+			setDefaultActive(newVal)
+		})
 
 		var pages = {
-			'home': false,
-			'about': false,
-			'contact': false
+			'v_home': [false, 'Home'],
+			'v_about': [false, 'About Us'],
+			'v_contact': [false, 'Contact Us'],
+			'e_home': [false, 'Home'],
+			'e_meals': [false, 'Meals'],
+			'e_dish_input': [false, 'Dish inputs'],
+			'e_buy_order': [false, 'Buy Order'],
+			'e_provider': [false, 'Providers']
 		}
 
-		pages['home'] = true;
-
 		$scope.setActive = function(itemName){
-			cleanPages();
-			pages[itemName] = true;
+			cleanPages()
+			pages[itemName][0] = true
+			TitleService.setTitle(pages[itemName][1])
 		}
 
 		function cleanPages(){
 			for(var page in pages){
-				pages[page] = false;
+				console.log(pages[page])
+				pages[page][0] = false
 			}
 		}
 
-		$scope.pages = pages;
+		function setDefaultActive(role){
 
-	}]);
+			cleanPages()
+			
+			//TODO client-side
+			if(role=='v'){
+				pages['v_home'][0] = true
+			}else{
+				pages['e_home'][0] = true
+			}
+		}
+
+		function clickLogo(){
+			//TODO redirect to home page, based on role.
+		}
+
+		$scope.pages = pages
+	}])
 
 app.controller('homeCtrl', [
 	'$scope', '$routeParams',
-	function($scope, $routeParams){
-		$scope.err = $routeParams.err;
-	}]);
+	function ($scope, $routeParams) {
+		$scope.err = $routeParams.err
+	}])
 
 app.controller('loginCtrl', 
-	['$scope', '$location','LoginService', 'currentUserService',
-	function($scope, $location, LoginService, currentUserService){
-		$scope.user = {};
-		var user = $scope.user;
+	['$scope', '$location','LoginService', 'currentUserService', '$rootScope',
+	function ($scope, $location, LoginService, currentUserService, $rootScope) {
+		$scope.user = {}
+		var user = $scope.user
 
 		var err = "Error logging in."
 
 		function success(userResponse){
 			if(userResponse.authenticated){
-				currentUserService.setUser(userResponse.usuario)
-				$location.path('/authenticated');
+				var user = userResponse.usuario
+				user.authenticated = true
+
+				currentUserService.setUser(user)
+				$rootScope.role = 'e'
+
+				$location.path('/home')
 			}else{
-				$location.path('/').search({err: err});
+				$location.path('/').search({err: err})
 			}
 		}
 
 		function error(data){
-			$location.path('/').search({err: err});
+			$location.path('/').search({err: err})
 		}
 
 		function authenticate(){
-			LoginService.authenticate({}, user, success, error);
+			LoginService.authenticate({}, user, success, error)
+		}
+
+		function logOut(){
+			currentUserService.setUser(null)
+			$rootScope.role = 'v'
+			$location.path('/')
 		}
 
 		$scope.validate = authenticate
-	}]);
+		$scope.logOut = logOut
+	}])
 
 app.controller('welcomeCtrl', 
-	['$route', 'currentUserService', 
-	function($route, currentUserService){ 
-		$route.user = currentUserService.getUser();
-	}]);
+	['$scope', '$location', 'currentUserService', 
+	function ($scope, $location, currentUserService) {
+
+		$scope.$on('$viewContentLoaded', ()=>{
+			var user = currentUserService.getUser()
+
+			if(user === null){
+				goHome()
+			}else if(user.authenticated){
+				$scope.user = user
+			} else {
+				goHome()
+			}
+			
+		})
+
+		function goHome(){
+			$location.path('/')
+		}
+
+	}])

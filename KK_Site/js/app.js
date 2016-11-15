@@ -8,8 +8,11 @@ function routeConfig($routeProvider){
 			templateUrl: 'views/home.html',
 			controller: 'homeCtrl'
 		})
-		.when('/authenticated',{
+		.when('/home',{
 			templateUrl: 'views/welcome.html',
 			controller: 'welcomeCtrl'
+		})
+		.otherwise({
+			redirectTo: '/'
 		});
 }
