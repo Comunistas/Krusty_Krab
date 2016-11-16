@@ -3,6 +3,8 @@
  */
 package com.krustykrab.model.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -17,11 +19,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class Insumo_Plato
+public class Ingredient_Dish implements Serializable
 {	
-	
-	@Id private Long id;
-	@ManyToOne private Insumo insumo;
-	@ManyToOne private Plato plato;
-	private int cantidad;
+	@Id @ManyToOne private Ingredient ingredient;
+	@Id @ManyToOne private Dish dish;
+	private int amount;
 }

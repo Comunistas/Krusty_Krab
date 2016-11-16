@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -16,10 +17,11 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 @Entity
-public class Plato_Pedido implements Serializable
+public class PurchaseOrder_Ingredient implements Serializable
 {
-	@Id @ManyToOne private Plato plato;
-	@Id @ManyToOne private Pedido pedido;
-	private int cantidad;
+	@Id @ManyToOne private Ingredient ingredient;
+	@Id @ManyToOne private PurchaseOrder purchaseOrder;
+	private int amount;
 }
