@@ -1,0 +1,39 @@
+.navbar-nav>li, .navbar-nav{
+  float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child{
+  margin-right: -15px !important;
+}
+
+.navbar-right{
+  float: right !important;
+  margin-right: 30px;
+}
+
+.navbar{
+	min-width:1000px;
+	width:100%;
+	margin: 0 0px;
+	border-bottom: 1px solid;
+	color: #a9444f;
+	padding: 0 30px;
+}
+
+.content{
+	width:1000px;
+	margin: 30px auto;
+	padding: 0 20px;
+}
+
+.center-h{
+	margin: 0 auto;
+}
+
+.center-v{
+	margin: auto 0;
+}
+
+.center-all{
+	margin: auto auto;
+}
