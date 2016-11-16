@@ -3,6 +3,8 @@
  */
 package com.krustykrab.model.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,13 +20,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class Proveedor
+public class Employee
 {
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String ruc;
-	private String razonSocial;
-	private String telefono;
-	private String direccion;
+	private String name;
+	private String lastName;
+	private String idNumber;
+	private Date birthDate;
+	private char employeeType;
 }

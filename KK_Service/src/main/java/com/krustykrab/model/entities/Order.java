@@ -22,26 +22,26 @@ import lombok.Data;
  */
 @Data
 @Entity
-public class Pedido
+public class Order
 {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	private Cliente cliente;
+	private Client client;
 	
 	@ManyToOne
-	private Empleado empleado;
+	private Employee employee;
 	
 	@ManyToOne
-	private Mesa mesa;
+	private Table table;
 	
-	private String estado;
+	private String state;
 	private boolean delivery;
-	private String direccion;
-	private Date fecha;
+	private String address;
+	private Date date;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="pedido")
-	private List<Plato_Pedido> detalle;
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="order")
+	private List<Dish_Order> detail;
 }

@@ -24,21 +24,21 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class OrdenCompra
+public class PurchaseOrder
 {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	private Empleado empleado;
+	private Employee employee;
 	
 	@ManyToOne 
-	private Proveedor proveedor;
-	private String numero;
-	private Date fecha;
-	private char estado;
+	private Supplier supplier;
+	private String number;
+	private Date date;
+	private char state;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="ordenCompra")
-	private List<OrdenCompra_Insumo> detalle;
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="purchaseOrder")
+	private List<PurchaseOrder_Ingredient> detail;
 }

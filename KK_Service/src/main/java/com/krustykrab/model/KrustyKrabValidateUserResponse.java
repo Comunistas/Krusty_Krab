@@ -1,6 +1,6 @@
 package com.krustykrab.model;
 
-import com.krustykrab.model.entities.Usuario;
+import com.krustykrab.model.entities.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class KrustyKrabValidarUsuarioResponse {
+public class KrustyKrabValidateUserResponse {
 	private boolean authenticated;
-	private Usuario usuario;
+	private User user;
 }

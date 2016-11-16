@@ -3,13 +3,13 @@
  */
 package com.krustykrab.model.entities;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,17 +21,22 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class Plato
+public class Receipt
 {
 	
 	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String nombre;
-	private String descripcion;
-	private double precio;
-	private int cantidadStockDiario;
-	private int stockActual;
 	
-	@OneToMany(mappedBy="plato")
-	private List<Insumo_Plato> insumos;
+	@ManyToOne
+	private Order order;
+	
+	private Date date;
+	private String tin;
+	private boolean invoice;
+	private String companyName;
+	private char paymentMethod;
+	private String cardNumber;
+	private double subtotal;
+	private double vat;
+	private double totalCost;
 }

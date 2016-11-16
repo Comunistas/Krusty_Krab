@@ -20,17 +20,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Cliente
+public class Client
 {
 	
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private String nombre;
-	private String apellidoPaterno;
-	private String apellidoMaterno;
-	private String dni;
-	private String telefono;
-	private String correo;
+	private String name;
+	private String lastName;
+	private String idNumber;
+	private String phoneNumber;
+	private String email;
 	
 	
 }
