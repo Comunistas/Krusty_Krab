@@ -3,6 +3,7 @@ package com.krustykrab.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.krustykrab.service.KrustyKrabCrudService;
 import com.krustykrab.service.KrustyKrabService;
 import com.krustykrab.service.impl.KrustyKrabUsuarioServiceImpl;
 
+@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping("/v1/usuarios")
 public class KrustyKrabUsuarioRestController {
