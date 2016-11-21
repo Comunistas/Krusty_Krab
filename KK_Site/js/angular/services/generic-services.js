@@ -1,4 +1,4 @@
-app.factory('serviceUrl', [function(){
+app.factory('ServiceUrl', [function() {
 
 	//Preferrable to be absolute
 	var serviceHostUrl = 'http://localhost'
@@ -6,7 +6,7 @@ app.factory('serviceUrl', [function(){
 	//set -1 or minor if want to use a default port.
 	var port = 8000;
 
-	function serviceUrl(){
+	function serviceUrl() {
 		if(port<0) {
 			return serviceHostUrl + '/';
 		}else{
@@ -17,21 +17,21 @@ app.factory('serviceUrl', [function(){
 	return serviceUrl();
 }]);
 
-app.factory('TitleService', [function(){
+app.factory('TitleService', [function() {
 	return {
-		setTitle: function(newTitle){document.title = newTitle}
+		setTitle: function(newTitle) {document.title = newTitle}
 	};
 }]);
 
-app.factory('currentUserService', [function(){
+app.factory('CurrentUserService', [function() {
 
 	var user = null;
 
-	function getCurrentUser(){
+	function getCurrentUser() {
 		return user;
 	}
 
-	function setCurrentUser(newUser){
+	function setCurrentUser(newUser) {
 		user = newUser;
 	}
 
@@ -41,11 +41,15 @@ app.factory('currentUserService', [function(){
 	}
 }]);
 
-app.factory('LoginService', ['$resource', 'serviceUrl', function($resource, serviceUrl){
-	return $resource(serviceUrl + 'v1/usuarios/login', {/*Default params*/}, 
+app.factory('LoginService', ['$resource', 'ServiceUrl', function($resource, ServiceUrl) {
+
+	var resource = $resource(ServiceUrl + 'v1/usuarios/login', {/*Default params*/}, 
 		{'authenticate': {
 			/*new type of method, just using another name, for better understanding*/
 			method:'POST'
-		}
-	});
+		}})
+	
+	return {authenticate: function(user, successCb, errorCb){
+			resource.authenticate({}, user, successCb, errorCb)
+	}}
 }]);

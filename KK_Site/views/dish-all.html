@@ -1,0 +1,11 @@
+<div ng-repeat="dish in dishes track by dish.id">
+	<div>
+		<h2><a href="#dish?id={{dish.id}}">{{dish.name}}</a></h2>
+		<ul>
+			<li>{{dish.description}}</li>
+			<li>{{dish.price}}</li>
+			<li>{{dish.dailyStock}}</li>
+			<li>{{dish.currentStock}}</li>
+		</ul>
+	</div>
+</div>
