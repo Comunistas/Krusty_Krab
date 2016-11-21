@@ -18,6 +18,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
+@javax.persistence.Table(name="KrustyTable")
 public class Table
 {
 	

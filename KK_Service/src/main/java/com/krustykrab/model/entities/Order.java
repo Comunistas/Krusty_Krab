@@ -22,6 +22,7 @@ import lombok.Data;
  */
 @Data
 @Entity
+@javax.persistence.Table(name="KrustyOrder")
 public class Order
 {
 	
