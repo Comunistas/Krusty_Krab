@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@javax.persistence.Table(name="KrustyOrder")
+@Table(name="KrustyOrder")
 public class Order
 {
 	
