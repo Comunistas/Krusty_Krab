@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Vladislav Zedano
@@ -20,6 +21,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Dish
 {
