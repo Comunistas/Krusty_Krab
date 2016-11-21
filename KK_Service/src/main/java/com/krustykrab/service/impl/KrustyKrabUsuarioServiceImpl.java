@@ -3,6 +3,7 @@ package com.krustykrab.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.krustykrab.model.KrustyKrabValidateUserResponse;
 import com.krustykrab.model.dao.UserDAO;
@@ -10,6 +11,7 @@ import com.krustykrab.model.entities.User;
 import com.krustykrab.service.KrustyKrabCrudService;
 import com.krustykrab.service.KrustyKrabService;
 
+@Service
 public class KrustyKrabUsuarioServiceImpl implements KrustyKrabCrudService<User>, KrustyKrabService{
 	
 	@Autowired
@@ -18,7 +20,7 @@ public class KrustyKrabUsuarioServiceImpl implements KrustyKrabCrudService<User>
 		
 	@Override
 	public KrustyKrabValidateUserResponse validarUsuario(User usuario) {
-		User usuarioValidado = usuarioDAO.findByUsuarioAndPassword(usuario.getUser(), usuario.getPassword());
+		User usuarioValidado = usuarioDAO.findByUserAndPassword(usuario.getUser(), usuario.getPassword());
 		KrustyKrabValidateUserResponse response = null;
 		if(usuarioValidado != null) {
 			response = new KrustyKrabValidateUserResponse(true, usuarioValidado);
