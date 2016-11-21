@@ -27,11 +27,8 @@ public class KrustyKrabDishRestController
 	
 	
 	@GetMapping
-	public ResponseEntity<List<Dish>> getDishes(){
-		
-		List<Dish> dishes = service.getEntities();
-		
-		return ResponseEntity.ok(dishes);
+	public ResponseEntity<List<Dish>> getDishes(){		
+		return ResponseEntity.ok(service.getEntities());
 	}
 	
 	@GetMapping(path="/{id}")
