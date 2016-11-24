@@ -22,6 +22,8 @@ public class KrustyKrabUsuarioServiceImpl implements KrustyKrabCrudService<User>
 	public KrustyKrabValidateUserResponse validarUsuario(User usuario) {
 		User usuarioValidado = usuarioDAO.findByUserAndPassword(usuario.getUser(), usuario.getPassword());
 		KrustyKrabValidateUserResponse response = null;
+		
+		
 		if(usuarioValidado != null) {
 			response = new KrustyKrabValidateUserResponse(true, usuarioValidado);
 		} else {

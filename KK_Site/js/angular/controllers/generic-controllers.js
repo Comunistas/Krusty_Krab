@@ -23,7 +23,7 @@ app.controller('navCtrl',
 			'v_about': [false, 'About Us'],
 			'v_contact': [false, 'Contact Us'],
 			'e_home': [false, 'Home'],
-			'e_meals': [false, 'Meals'],
+			'e_dishes': [false, 'Meals'],
 			'e_dish_input': [false, 'Dish inputs'],
 			'e_buy_order': [false, 'Buy Order'],
 			'e_provider': [false, 'Providers']
@@ -37,7 +37,6 @@ app.controller('navCtrl',
 
 		function cleanPages(){
 			for(var page in pages){
-				console.log(pages[page])
 				pages[page][0] = false
 			}
 		}
@@ -68,19 +67,19 @@ app.controller('homeCtrl', [
 	}])
 
 app.controller('loginCtrl', 
-	['$scope', '$location','LoginService', 'currentUserService', '$rootScope',
-	function ($scope, $location, LoginService, currentUserService, $rootScope) {
+	['$scope', '$location','LoginService', 'CurrentUserService', '$rootScope',
+	function ($scope, $location, LoginService, CurrentUserService, $rootScope) {
 		$scope.user = {}
 		var user = $scope.user
 
 		var err = "Error logging in."
 
-		function success(userResponse){
+		var success = function (userResponse) {
 			if(userResponse.authenticated){
-				var user = userResponse.usuario
+				var user = userResponse.user
 				user.authenticated = true
 
-				currentUserService.setUser(user)
+				CurrentUserService.setUser(user)
 				$rootScope.role = 'e'
 
 				$location.path('/home')
@@ -89,18 +88,19 @@ app.controller('loginCtrl',
 			}
 		}
 
-		function error(data){
+		var error = function (data) {
 			$location.path('/').search({err: err})
 		}
 
-		function authenticate(){
-			LoginService.authenticate({}, user, success, error)
-		}
-
-		function logOut(){
-			currentUserService.setUser(null)
+		var logOut = function () {
+			CurrentUserService.setUser(null)
 			$rootScope.role = 'v'
 			$location.path('/')
+		}
+
+		// Service methods
+		var authenticate = function (){
+			LoginService.authenticate(user, success, error)
 		}
 
 		$scope.validate = authenticate
@@ -108,12 +108,11 @@ app.controller('loginCtrl',
 	}])
 
 app.controller('welcomeCtrl', 
-	['$scope', '$location', 'currentUserService', 
-	function ($scope, $location, currentUserService) {
+	['$scope', '$location', 'CurrentUserService', 
+	function ($scope, $location, CurrentUserService) {
 
 		$scope.$on('$viewContentLoaded', ()=>{
-			var user = currentUserService.getUser()
-
+			var user = CurrentUserService.getUser()
 			if(user === null){
 				goHome()
 			}else if(user.authenticated){
