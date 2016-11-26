@@ -10,7 +10,7 @@ import com.krustykrab.model.entities.Client;
 import com.krustykrab.service.KrustyKrabCrudService;
 
 @Service
-public class KrustyKrabClienteServiceImpl implements KrustyKrabCrudService<Client>{
+public class KrustyKrabClientServiceImpl implements KrustyKrabCrudService<Client>{
 
 	@Autowired ClientDAO clienteDAO;
 	
@@ -26,12 +26,12 @@ public class KrustyKrabClienteServiceImpl implements KrustyKrabCrudService<Clien
 
 	@Override
 	public Client getEntity(Long id) {
-		return null;
+		return clienteDAO.findOne(id);
 	}
 
 	@Override
 	public Client updateEntity(Client entity) {
-		return null;
+		return clienteDAO.save(entity);
 	}
 
 	@Override

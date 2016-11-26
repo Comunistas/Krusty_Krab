@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +22,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="KrustyOrder")
+@javax.persistence.Table(name="KrustyOrder")
 public class Order
 {
 	
@@ -36,7 +35,7 @@ public class Order
 	@ManyToOne
 	private Employee employee;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity=Table.class)
 	private Table table;
 	
 	private String state;

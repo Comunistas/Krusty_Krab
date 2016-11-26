@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.krustykrab.rest;
 
 import java.util.List;
@@ -10,25 +7,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.krustykrab.model.entities.Dish;
-import com.krustykrab.service.impl.KrustyKrabDishServiceImpl;
+import com.krustykrab.model.entities.Ingredient_Dish;
+import com.krustykrab.service.impl.KrustyKrabIngredient_DishServiceImpl;
 
-@RestController
-@RequestMapping(path="v1/dishes")
-public class KrustyKrabDishRestController
-{
-	@Autowired KrustyKrabDishServiceImpl service;
+@RequestMapping(path = "v1/ingredients_dishes")
+public class KrustyKrabIngredient_DishRestController {
+	@Autowired KrustyKrabIngredient_DishServiceImpl service;
 	
 	
 	@GetMapping
-	public ResponseEntity<List<Dish>> getDishes(){		
+	public ResponseEntity<List<Ingredient_Dish>> getIngredients_Dishes(){		
 		return ResponseEntity.ok(service.getEntities());
 	}
 	
 	@GetMapping(path="/{id}")
-	public ResponseEntity<Dish> getDish(@PathVariable long id){
+	public ResponseEntity<Ingredient_Dish> getIngredient_Dish(@PathVariable long id){
 		return ResponseEntity.ok(service.getEntity(id));
 	}
 }

@@ -12,15 +12,15 @@ import com.krustykrab.service.KrustyKrabCrudService;
 import com.krustykrab.service.KrustyKrabService;
 
 @Service
-public class KrustyKrabUsuarioServiceImpl implements KrustyKrabCrudService<User>, KrustyKrabService{
+public class KrustyKrabUserServiceImpl implements KrustyKrabCrudService<User>, KrustyKrabService{
 	
 	@Autowired
 	UserDAO usuarioDAO;
 
 		
 	@Override
-	public KrustyKrabValidateUserResponse validarUsuario(User usuario) {
-		User usuarioValidado = usuarioDAO.findByUserAndPassword(usuario.getUser(), usuario.getPassword());
+	public KrustyKrabValidateUserResponse validateUser(User user) {
+		User usuarioValidado = usuarioDAO.findByUserAndPassword(user.getUser(), user.getPassword());
 		KrustyKrabValidateUserResponse response = null;
 		
 		
@@ -36,16 +36,14 @@ public class KrustyKrabUsuarioServiceImpl implements KrustyKrabCrudService<User>
 
 	@Override
 	public User getEntity(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return usuarioDAO.findOne(id);
 	}
 
 
 
 	@Override
 	public List<User> getEntities() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<User>)usuarioDAO.findAll();
 	}
 
 
@@ -59,8 +57,7 @@ public class KrustyKrabUsuarioServiceImpl implements KrustyKrabCrudService<User>
 
 	@Override
 	public User updateEntity(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return usuarioDAO.save(entity);
 	}
 
 

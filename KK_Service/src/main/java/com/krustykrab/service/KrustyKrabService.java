@@ -4,5 +4,5 @@ import com.krustykrab.model.KrustyKrabValidateUserResponse;
 import com.krustykrab.model.entities.User;
 
 public interface KrustyKrabService {
-	public KrustyKrabValidateUserResponse validarUsuario(User usuario);
+	public KrustyKrabValidateUserResponse validateUser(User user);
 }
