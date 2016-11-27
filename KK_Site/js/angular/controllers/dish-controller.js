@@ -23,14 +23,14 @@
 				console.log('This is the id: '+id)
 			})
 
-			var shit = function(data){
+			var success = function(data){
 					console.log('Response is an instance of Dish : ' + (data instanceof Dish))
 					DishService.setCurrentDish(data)
 					$scope.dish = DishService.getCurrentDish()
 				}
 
 			var getDish = function(id) {
-				Dish.get({id:id}, shit)
+				Dish.get({id:id}, success)
 			}
 
 			var saveDish = function() {
