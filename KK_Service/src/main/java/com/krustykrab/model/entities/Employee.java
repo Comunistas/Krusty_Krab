@@ -29,5 +29,4 @@ public class Employee
 	private String lastName;
 	private String idNumber;
 	private Date birthDate;
-	private char employeeType;
 }
