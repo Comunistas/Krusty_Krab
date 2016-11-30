@@ -32,7 +32,6 @@ public class Dish
 	private String description;
 	private double price;
 	private int dailyStock;
-	private int currentStock;
 	
 	@OneToMany(mappedBy="dish")
 	private List<Ingredient_Dish> ingredients;

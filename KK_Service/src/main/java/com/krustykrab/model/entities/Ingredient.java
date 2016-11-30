@@ -23,6 +23,8 @@ public class Ingredient
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	private int currentStock;
 	private String description;
 	private char measureUnit;
+	private String ingredientType;
 }

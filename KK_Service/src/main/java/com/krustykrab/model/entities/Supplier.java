@@ -27,4 +27,5 @@ public class Supplier
 	private String companyName;
 	private String phoneNumber;
 	private String address;
+	private String ingredientType;
 }
