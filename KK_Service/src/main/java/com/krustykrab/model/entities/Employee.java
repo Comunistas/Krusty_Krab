@@ -12,6 +12,7 @@ import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import java.io.Serializable;
 
 /**
  * @author Vladislav Zedano
@@ -20,7 +21,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class Employee
+public class Employee implements Serializable
 {
 	
 	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)

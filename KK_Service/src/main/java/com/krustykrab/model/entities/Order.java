@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 
 import lombok.Data;
 
@@ -23,7 +24,7 @@ import lombok.Data;
 @Data
 @Entity
 @javax.persistence.Table(name="KrustyOrder")
-public class Order
+public class Order implements Serializable
 {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
