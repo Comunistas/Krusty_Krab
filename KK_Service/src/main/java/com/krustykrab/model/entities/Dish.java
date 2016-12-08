@@ -34,7 +34,4 @@ public class Dish implements Serializable
 	private double price;
 	private int dailyStock;
 	private int currentStock;
-	
-	@OneToMany(mappedBy="dish")
-	private List<Ingredient_Dish> ingredients;
 }

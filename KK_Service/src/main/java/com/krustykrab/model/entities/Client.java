@@ -23,7 +23,6 @@ import java.io.Serializable;
 @Entity
 public class Client implements Serializable
 {
-	
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
@@ -31,8 +30,6 @@ public class Client implements Serializable
 	private String idNumber;
 	private String phoneNumber;
 	private String email;
-	
-	
 }
 
 

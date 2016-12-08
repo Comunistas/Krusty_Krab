@@ -1,0 +1,35 @@
+<div ng-if="$root.role==='m'" class="center-h">
+    <table class="table-tablet">
+        <tr>
+            <td colspan="2">
+                <h2>
+                    <center>Hi! Awaiting for your orders.</center>
+                </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="#order-new" role="button" class="btn btn-success btn-tablet">New Order</a>
+            </td>
+            <td>
+                <a href="#order-all" role="button" class="btn btn-default btn-tablet">All Orders</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<div ng-if="$root.role==='a'" class="center-h">
+    <table>
+        <tr>
+            <td>
+                <h2>
+                    <center>Welcome to Krusty Krab supply</center>
+                    <h1>
+            </td>
+        </tr>
+        <tr>
+            <td><a href="#order-new" role="button" class="btn btn-success">Daily check</a></td>
+            <td><a href="#order-new" role="button" class="btn btn-success">Make a purchase</a></td>
+        </tr>
+    </table>
+</div>

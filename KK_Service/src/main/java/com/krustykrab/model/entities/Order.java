@@ -43,7 +43,5 @@ public class Order implements Serializable
 	private boolean delivery;
 	private String address;
 	private Date date;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="order")
-	private List<Dish_Order> detail;
+
 }

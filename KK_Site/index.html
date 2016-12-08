@@ -1,74 +1,90 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
+
 <body ng-app="appModule">
 
-	<div ng-controller="bodyCtrl">
+    <div>
+        <nav class="navbar navbar-fixed-top navbar-default" ng-controller="navCtrl" ng-if="$root.authenticated">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" ng-click="setActive('home')">Krusty Krab</a>
+            </div>
 
-	    <nav class="navbar navbar-fixed-top navbar-default" ng-controller="navCtrl">
-	        <div class="navbar-header">
-	          <a class="navbar-brand" href="#" ng-click="setActive('home')">Krusty Krab</a>
-	        </div>
+            <div ng-show="$root.role==='a'">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{active: pages.a_home}" ng-click="setActive('a_home')"><a href="#/home">Home</a></li>
+                    <li ng-class="{active: pages.a_dishes}" ng-click="setActive('a_dishes')"><a href="#dishes">Dishes</a></li>
+                    <li ng-class="{active: pages.a_dish_input}" ng-click="setActive('a_dish_input')"><a href="#contact">Inputs</a></li>
+                    <li ng-class="{active: pages.a_buy_order}" ng-click="setActive('a_buy_order')"><a href="#contact">Buy Order</a></li>
+                    <li ng-class="{active: pages.a_provider}" ng-click="setActive('a_provider')"><a href="#contact">Buy Order</a></li>
+                </ul>
 
-	        <div id="employee-nav" ng-show="$root.role=='e'">
-	          <ul class="nav navbar-nav">
-	            <li ng-class="{active: pages.e_home[0]}" ng-click="setActive('e_home')"><a href="#/home">Home</a></li>
-	            <li ng-class="{active: pages.e_dishes[0]}" ng-click="setActive('e_dishes')"><a href="#dishes">Dishes</a></li>
-	            <li ng-class="{active: pages.e_dish_input[0]}" ng-click="setActive('e_dish_input')"><a href="#contact">Inputs</a></li>
-	            <li ng-class="{active: pages.e_buy_order[0]}" ng-click="setActive('e_buy_order')"><a href="#contact">Buy Order</a></li>
-	            <li ng-class="{active: pages.e_provider[0]}" ng-click="setActive('e_provider')"><a href="#contact">Buy Order</a></li>	          
-	          </ul>
-	          <form class="navbar-form navbar-right" ng-controller="loginCtrl">
-	            <button type="submit" class="btn btn-danger" ng-click="logOut()">Log out</button>
-	          </form>
-	        </div>
+            </div>
 
-	        <div id="client-nav" ng-show="$root.role=='v'">
-	          <ul class="nav navbar-nav">
-	            <li ng-class="{active: pages.v_home[0]}" ng-click="setActive('v_home')"><a href="#">Home</a></li>
-	            <li ng-class="{active: pages.v_about[0]}" ng-click="setActive('v_about')"><a href="#about">About</a></li>
-	            <li ng-class="{active: pages.v_contact[0]}" ng-click="setActive('v_contact')"><a href="#contact">Contact</a></li>
-	          </ul>
-	          <form class="navbar-form navbar-right" ng-controller="loginCtrl">
-	            <div class="form-group">
-	              <input type="text" placeholder="user" class="form-control" ng-model="user.user">
-	            </div>
-	            <div class="form-group">
-	              <input type="password" placeholder="password" class="form-control" ng-model="user.password">
-	            </div>
-	            <button type="submit" class="btn btn-success" ng-click="validate()">Sign in</button>
-	          </form>
-	        </div>
-	    </nav>
+            <div ng-show="$root.role==='m'">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{active: pages.m_home}" ng-click="setActive('m_home')"><a href="#">Home</a></li>
+                    <li ng-class="{active: pages.m_about}" ng-click="setActive('m_about')"><a href="#dishes">Dishes</a></li>
+                    <li ng-class="{active: pages.m_contact}" ng-click="setActive('m_contact')"><a href="#orders">Orders</a></li>
+                </ul>
+            </div>
+            <form class="navbar-form navbar-right" ng-controller="loginCtrl">
+                <button type="submit" class="btn btn-danger" ng-click="logOut()">Log out</button>
+            </form>
+        </nav>
 
-	    <div class="content">
-	    	<ng-view class="center"></ng-view>
-	    </div>
+        <div class="content">
+            <ng-view class="center"></ng-view>
+            <div ng-controller="loginCtrl" ng-if="!$root.authenticated">
+                <form class="jumbotron login-sht center-h">
+                    <h3>
+                        <center>Welcome to KrustyKrab's portal!</center>
+                    </h3>
 
-
-	</div>
-
-
-	<!-- -->
-	<script type="text/javascript" src="js/angular/angular.js"></script>
-	<script type="text/javascript" src="js/angular/angular-resource.js"></script>
- 	<script type="text/javascript" src="js/angular/angular-route.min.js"></script>
-
-	<script type="text/javascript" src="js/ui-bootstrap-tpls-2.2.0.min.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
-
-	<script type="text/javascript" src="js/angular/services/generic-services.js"></script>
-	<script type="text/javascript" src="js/angular/services/dish-service.js"></script>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                            <input id="txtUser" type="text" placeholder="user" class="form-control" ng-model="user.user" onmouseover="focus()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-log-in"></span></div>
+                            <input type="password" placeholder="password" class="form-control" ng-model="user.password">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success form-control" ng-click="validate()">Sign in</button>
+                </form>
+                <h3 style="color:red">
+                    <center ng-bind="err"></center>
+                </h3>
+            </div>
+        </div>
+    </div>
 
 
-	<script type="text/javascript" src="js/angular/controllers/generic-controllers.js"></script>
-	<script type="text/javascript" src="js/angular/controllers/dish-controller.js"></script>
+    <!-- -->
+    <script type="text/javascript" src="js/angular/angular.js"></script>
+    <script type="text/javascript" src="js/angular/angular-resource.js"></script>
+    <script type="text/javascript" src="js/angular/angular-route.min.js"></script>
+
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-2.2.0.min.js"></script>
+    <script type="text/javascript" src="zz_Generic/app.js"></script>
+
+    <script type="text/javascript" src="zz_Generic/generic-services.js"></script>
+    <script type="text/javascript" src="dish/dish-service.js"></script>
+
+
+    <script type="text/javascript" src="zz_Generic/generic-controllers.js"></script>
+    <script type="text/javascript" src="dish/dish-controller.js"></script>
 </body>
+
 </html>

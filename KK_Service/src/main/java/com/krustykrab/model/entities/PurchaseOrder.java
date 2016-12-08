@@ -40,6 +40,4 @@ public class PurchaseOrder implements Serializable
 	private Date date;
 	private char state;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="purchaseOrder")
-	private List<PurchaseOrder_Ingredient> detail;
 }
