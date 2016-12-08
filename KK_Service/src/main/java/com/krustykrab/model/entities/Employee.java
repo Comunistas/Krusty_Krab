@@ -27,5 +27,4 @@ public class Employee implements Serializable
 	private String name;
 	private String lastName;
 	private String idNumber;
-	private Date birthDate;
 }

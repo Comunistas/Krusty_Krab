@@ -1,10 +1,12 @@
 package com.krustykrab.model.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -16,4 +18,7 @@ public class User implements Serializable {
 	private String user;
 	private String password;
 	private char userType;
+	
+	@OneToOne
+	private Employee employee;
 }

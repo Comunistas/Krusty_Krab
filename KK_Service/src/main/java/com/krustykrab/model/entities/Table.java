@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Vladislav Zedano
@@ -17,6 +18,7 @@ import lombok.Data;
  */
 @Data
 @Entity
+@NoArgsConstructor
 @javax.persistence.Table(name="KrustyTable")
 public class Table implements Serializable
 {
@@ -24,4 +26,8 @@ public class Table implements Serializable
 	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private int number;
+	
+	public Table(long id){
+		this.id = id;
+	}
 }

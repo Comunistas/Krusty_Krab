@@ -24,6 +24,19 @@ public class KrustyKrabDishServiceImpl implements KrustyKrabCrudService<Dish>
 
 	@Autowired DishDAO dao;
 	
+	public List<Dish> getEntities(List<Long> ids){
+		
+		List<Dish> dishes = new ArrayList<Dish>();
+		Iterator<Dish> dishesIterator = dao.findAll(ids).iterator();
+		
+		while(dishesIterator.hasNext()){
+			dishes.add(dishesIterator.next());
+		}
+		
+		return dishes;
+		
+	}
+	
 	@Override
 	public Dish getEntity(Long id)
 	{
