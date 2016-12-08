@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 
 import lombok.Data;
 
@@ -23,7 +24,7 @@ import lombok.Data;
 @Data
 @Entity
 @javax.persistence.Table(name="KrustyOrder")
-public class Order
+public class Order implements Serializable
 {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -42,7 +43,5 @@ public class Order
 	private boolean delivery;
 	private String address;
 	private Date date;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="order")
-	private List<Dish_Order> detail;
+
 }

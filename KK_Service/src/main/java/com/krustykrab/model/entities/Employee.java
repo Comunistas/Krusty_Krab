@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
+import java.io.Serializable;
 
 /**
  * @author Vladislav Zedano
@@ -18,7 +19,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-public class Employee
+public class Employee implements Serializable
 {
 	
 	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)

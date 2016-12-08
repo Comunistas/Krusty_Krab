@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 
 import lombok.Data;
 
@@ -19,7 +20,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-public class Dish
+public class Dish implements Serializable
 {
 	
 	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,7 +29,4 @@ public class Dish
 	private String description;
 	private double price;
 	private int dailyStock;
-	
-	@OneToMany(mappedBy="dish")
-	private List<Ingredient_Dish> ingredients;
 }

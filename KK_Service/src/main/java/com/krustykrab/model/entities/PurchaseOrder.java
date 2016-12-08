@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 
 import lombok.Data;
 
@@ -22,7 +23,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-public class PurchaseOrder
+public class PurchaseOrder implements Serializable
 {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,6 +38,4 @@ public class PurchaseOrder
 	private Date date;
 	private char state;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="purchaseOrder")
-	private List<PurchaseOrder_Ingredient> detail;
 }
