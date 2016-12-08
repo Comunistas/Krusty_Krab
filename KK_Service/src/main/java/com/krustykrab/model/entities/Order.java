@@ -12,7 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Vladislav Zedano
@@ -20,6 +22,8 @@ import lombok.Data;
  */
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @javax.persistence.Table(name="KrustyOrder")
 public class Order implements Serializable
 {
