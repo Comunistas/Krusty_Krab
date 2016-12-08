@@ -46,20 +46,11 @@ public class KrustyKrabOrderRestController {
     }
 	
 	
-	@PostMapping()
-	public ResponseEntity<Order> saveOrder(@RequestBody Order Order) {
-		Order responseOrder = crudService.saveEntity(Order);
-		ResponseEntity<Order> responseEntity = new ResponseEntity<Order>(responseOrder, HttpStatus.OK);
-		return responseEntity;
-	}
-	
-	@PutMapping(value = CommonConstants.ID)
-	public ResponseEntity<Order> updateOrder(@RequestBody Order Order) {
-		Order responseOrder = crudService.updateEntity(Order);
-		ResponseEntity<Order> responseEntity = new ResponseEntity<Order>(responseOrder, HttpStatus.OK);
-		return responseEntity;
-	}
-	
+	@GetMapping(path="/save/{tableId}")
+	public ResponseEntity<String> saveOrder(@PathParam("tableId")long tableId) {
+		shoppingCartUtil.saveOrder(tableId);
+		return ResponseEntity.ok("Order saved.");
+	}	
 
 	@GetMapping(path="/new/{tableId}/{employeeId}")
 	public ResponseEntity<String> createModifiableOrder(@PathVariable("tableId")long tableId,
@@ -69,7 +60,7 @@ public class KrustyKrabOrderRestController {
 		return ResponseEntity.ok("New order created");
 	}
 	
-	@PostMapping(path="/addDish/{tableId}")
+	@PostMapping(path="/add-dish/{tableId}")
 	public ResponseEntity<ShoppingCartResponse> addDishToOrder(@RequestBody Dish dish,
 	                                             @PathParam("tableId")long tableId){
 		return ResponseEntity.ok(shoppingCartUtil.addDishToOrder(tableId, dish));
