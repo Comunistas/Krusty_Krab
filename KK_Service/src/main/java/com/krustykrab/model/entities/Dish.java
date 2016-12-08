@@ -11,17 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author Vladislav Zedano
  *
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Dish
 {
