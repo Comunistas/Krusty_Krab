@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.io.Serializable;
 
 /**
  * @author Vladislav Zedano
@@ -20,9 +21,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Client
+public class Client implements Serializable
 {
-	
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
@@ -30,8 +30,6 @@ public class Client
 	private String idNumber;
 	private String phoneNumber;
 	private String email;
-	
-	
 }
 
 

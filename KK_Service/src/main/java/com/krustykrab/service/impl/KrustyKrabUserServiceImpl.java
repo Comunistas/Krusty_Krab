@@ -16,7 +16,6 @@ public class KrustyKrabUserServiceImpl implements KrustyKrabCrudService<User>, K
 	
 	@Autowired
 	UserDAO usuarioDAO;
-
 		
 	@Override
 	public KrustyKrabValidateUserResponse validateUser(User user) {

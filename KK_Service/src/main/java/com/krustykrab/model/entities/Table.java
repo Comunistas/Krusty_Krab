@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +20,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Entity
 @javax.persistence.Table(name="KrustyTable")
-public class Table
+public class Table implements Serializable
 {
 	
 	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
