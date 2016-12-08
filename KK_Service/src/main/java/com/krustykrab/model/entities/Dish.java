@@ -33,5 +33,4 @@ public class Dish implements Serializable
 	private String description;
 	private double price;
 	private int dailyStock;
-	private int currentStock;
 }
