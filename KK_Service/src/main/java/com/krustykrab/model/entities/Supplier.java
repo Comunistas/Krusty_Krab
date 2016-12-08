@@ -28,4 +28,5 @@ public class Supplier implements Serializable
 	private String companyName;
 	private String phoneNumber;
 	private String address;
+	private String ingredientType;
 }
