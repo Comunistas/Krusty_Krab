@@ -31,13 +31,13 @@ public class KrustyKrabOrderRestController {
 	@Autowired private ShoppingCartUtil shoppingCartUtil;
 	
 	
-	@GetMapping(path="/new/{tableId}/{employeeId}")
+	@GetMapping(path="/cart/new/{tableId}/{employeeId}")
 	public ResponseEntity<SuccessResponse> createModifiableOrder(@PathVariable("tableId")Long tableId,
 	                                                             @PathVariable("employeeId")Long employeeId){		
 		return ResponseEntity.ok(new SuccessResponse(shoppingCartUtil.createANewOrder(tableId, employeeId)));
 	}
 	
-	@PostMapping(path="/add-dish/{tableId}")
+	@PostMapping(path="/cart/add-dish/{tableId}")
 	public ResponseEntity<ShoppingCartResponse> addDishesToOrder(@RequestBody Dish dish,
 	                                                             @PathVariable("tableId")Long tableId,
 	                                                             @RequestParam("amount")Integer amount){
@@ -46,7 +46,7 @@ public class KrustyKrabOrderRestController {
 		return ResponseEntity.ok(shoppingCartUtil.addDishesToOrder(tableId, dish, amount));
 	}
 	
-	@GetMapping(path="/remove-dish/{tableId}/{dishId}")
+	@GetMapping(path="/cart/remove-dish/{tableId}/{dishId}")
 	public ResponseEntity<ShoppingCartResponse> removeDishesFromOrder(@PathVariable("tableId")Long tableId,
 	                                                           @PathVariable("dishId")Long dishId,
 	                                                           @RequestParam("amount")Integer amount){
@@ -54,13 +54,13 @@ public class KrustyKrabOrderRestController {
 	}
 
 	
-	@GetMapping(path="/save/{tableId}")
+	@GetMapping(path="/cart/save/{tableId}")
 	public ResponseEntity<SuccessResponse> saveOrder(@PathVariable("tableId")Long tableId) {
 		shoppingCartUtil.saveOrder(tableId);
 		return ResponseEntity.ok(new SuccessResponse());
 	}	
 	
-	@GetMapping(path="/delete/{tableId}")
+	@GetMapping(path="/cart/delete/{tableId}")
 	public ResponseEntity<Collection<ShoppingCartResponse>> deleteOrder(@PathVariable("tableId")Long tableId) {
 		return ResponseEntity.ok(shoppingCartUtil.deleteOrder(tableId));
 	}	
@@ -68,6 +68,11 @@ public class KrustyKrabOrderRestController {
 	@GetMapping(path="/cart/{tableId}")
 	public ResponseEntity<ShoppingCartResponse> getCart (@PathVariable("tableId")Long tableId){
 		return ResponseEntity.ok(shoppingCartUtil.currentShoppingCart(tableId));
+	}
+	
+	@GetMapping(path="/cart/all")
+	public ResponseEntity<Collection<ShoppingCartResponse>> getAllCarts(){
+		return ResponseEntity.ok(shoppingCartUtil.getAllCarts());
 	}
 	
 	@GetMapping(value = CommonConstants.ID)

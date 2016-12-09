@@ -3,11 +3,13 @@ package com.krustykrab.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.krustykrab.model.dao.EmployeeDAO;
 import com.krustykrab.model.entities.Employee;
 import com.krustykrab.service.KrustyKrabCrudService;
 
+@Service
 public class KrustyKrabEmployeeServiceImpl implements KrustyKrabCrudService<Employee>{
 	@Autowired EmployeeDAO EmployeeeDAO;
 	

@@ -3,11 +3,13 @@ package com.krustykrab.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.krustykrab.model.dao.Ingredient_DishDAO;
 import com.krustykrab.model.entities.Ingredient_Dish;
 import com.krustykrab.service.KrustyKrabCrudService;
 
+@Service
 public class KrustyKrabIngredient_DishServiceImpl implements KrustyKrabCrudService<Ingredient_Dish> {
 	@Autowired Ingredient_DishDAO Ingredient_DisheDAO;
 	

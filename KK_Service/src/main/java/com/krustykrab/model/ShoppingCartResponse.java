@@ -10,6 +10,8 @@ import java.util.function.Predicate;
 
 import com.krustykrab.model.entities.Dish;
 import com.krustykrab.model.entities.Dish_Order;
+import com.krustykrab.model.entities.Employee;
+import com.krustykrab.model.entities.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,8 @@ public class ShoppingCartResponse implements Serializable
 	private static final long serialVersionUID = 4908305060643088971L;
 	private long tableId;
 	private long employeeId;
+	private Employee employee;
+	private Table table;
 	private List<Dish_Order> dishes;
 	private double subtotal;
 	

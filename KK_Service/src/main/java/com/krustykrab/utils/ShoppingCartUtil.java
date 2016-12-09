@@ -20,7 +20,9 @@ import com.krustykrab.model.entities.Employee;
 import com.krustykrab.model.entities.Order;
 import com.krustykrab.model.entities.Table;
 import com.krustykrab.service.impl.KrustyKrabDish_OrderServiceImpl;
+import com.krustykrab.service.impl.KrustyKrabEmployeeServiceImpl;
 import com.krustykrab.service.impl.KrustyKrabOrderServiceImpl;
+import com.krustykrab.service.impl.KrustyKrabTableServiceImpl;
 
 /**
  * @author Vladislav Zedano
@@ -32,6 +34,8 @@ public class ShoppingCartUtil
 
 	@Autowired private KrustyKrabOrderServiceImpl orderService;
 	@Autowired private KrustyKrabDish_OrderServiceImpl dishOrderService;
+	@Autowired private KrustyKrabEmployeeServiceImpl employeeService;
+	@Autowired private KrustyKrabTableServiceImpl tableService;
 	
 	/**
 	 * This is the cache for the not concluded orders.
@@ -44,6 +48,8 @@ public class ShoppingCartUtil
 		ShoppingCartResponse cart = new ShoppingCartResponse();
 		cart.setTableId(tableId);
 		cart.setEmployeeId(employeeId);
+		cart.setEmployee(employeeService.getEntity(employeeId));
+		cart.setTable(tableService.getEntity(tableId));
 
 		ORDER_CACHE.put(tableId, cart);
 				
@@ -59,6 +65,20 @@ public class ShoppingCartUtil
 			cart.addDishToCart(dish);
 		}
 
+		return cart;
+	}
+	
+	public ShoppingCartResponse removeDishesFromOrder(Long tableId, Long dishId, Integer amount){
+		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
+		
+		if(amount==null)return null;
+		
+		if(amount>1){
+			cart.removeDishesFromCart(dishId, amount);
+		}else if (amount==1){
+			cart.removeDishFromCart(dishId);
+		}
+		
 		return cart;
 	}
 	
@@ -93,19 +113,11 @@ public class ShoppingCartUtil
 		return ORDER_CACHE.values();
 	}
 	
-	public ShoppingCartResponse removeDishesFromOrder(Long tableId, Long dishId, Integer amount){
-		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
-		
-		if(amount==null)return null;
-		
-		if(amount>1){
-			cart.removeDishesFromCart(dishId, amount);
-		}else if (amount==1){
-			cart.removeDishFromCart(dishId);
-		}
-		
-		return cart;
+	public Collection<ShoppingCartResponse> getAllCarts(){
+		return ORDER_CACHE.values();
 	}
+	
+
 	
 	
 }
