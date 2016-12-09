@@ -38,17 +38,29 @@ public class ShoppingCartUtil
 	 */
 	private static Map<Long, ShoppingCartResponse> ORDER_CACHE = new HashMap<Long,ShoppingCartResponse>();
 	
-	public ShoppingCartResponse createANewOrder(long tableId, long employeeId){
+	public boolean createANewOrder(long tableId, long employeeId){
 		ShoppingCartResponse cart = new ShoppingCartResponse();
 		cart.setTableId(tableId);
 		cart.setEmployeeId(employeeId);
 		
-		return ORDER_CACHE.put(tableId, cart);
+		if(ORDER_CACHE.containsKey(tableId)) return false;
+		
+		ORDER_CACHE.put(tableId, cart);
+		
+		return true;
 	}
 	
 	public ShoppingCartResponse addDishToOrder(long tableId, Dish dish){
 		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
 		cart.addDishToCart(dish);
+		return cart;
+	}
+	
+	public ShoppingCartResponse addDishesToOrder(long tableId, Dish dish, int amount){
+		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
+		for(int i = 0; i<amount; i++){
+			cart.addDishToCart(dish);
+		}
 		return cart;
 	}
 	
@@ -66,7 +78,7 @@ public class ShoppingCartUtil
 		order = orderService.saveEntity(order);
 		
 		List<Dish_Order> detail = new ArrayList<Dish_Order>();
-		
+				
 		for(Dish dish : cart.getDishes()){
 			Dish_Order dishOrder = new Dish_Order();
 			dishOrder.setDish(dish);
@@ -78,6 +90,15 @@ public class ShoppingCartUtil
 	
 	public ShoppingCartResponse currentShoppingCart(long tableId){
 		return ORDER_CACHE.get(tableId);
+	}
+	
+	public List<ShoppingCartResponse> deleteOrder(long tableId){
+		ORDER_CACHE.remove(tableId);
+		return (List<ShoppingCartResponse>)ORDER_CACHE.values();
+	}
+	
+	public void removeDish(long tableId, long dishId){
+		ORDER_CACHE.get(tableId).removeDishFromCart(dishId);
 	}
 	
 }
