@@ -97,7 +97,7 @@
             
             $scope.saveCart = function(){
                 CartService.saveCart($scope.tableId, function(){
-                    $location.path('/order-all').search({msg:'Cart saved succesfully'})
+                    $location.path('/order-all').search({msg:'Order saved succesfully'})
                 })
             }
 
