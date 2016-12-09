@@ -33,7 +33,7 @@
                 <ul class="nav navbar-nav">
                     <li ng-class="{active: pages.m_home}" ng-click="setActive('m_home')"><a href="#home">Home</a></li>
                     <li ng-class="{active: pages.m_about}" ng-click="setActive('m_about')"><a href="#dishes">Dishes</a></li>
-                    <li ng-class="{active: pages.m_contact}" ng-click="setActive('m_contact')"><a href="#orders">Orders</a></li>
+                    <li ng-class="{active: pages.m_contact}" ng-click="setActive('m_contact')"><a href="#order-all">Orders</a></li>
                 </ul>
             </div>
             <form class="navbar-form navbar-right" ng-controller="loginCtrl">
@@ -85,13 +85,16 @@
     <script type="text/javascript" src="zz_Generic/generic-services.js"></script>
     <script type="text/javascript" src="CRUD/crud-service.js"></script>
     <script type="text/javascript" src="dish/dish-service.js"></script>
+    <script type="text/javascript" src="order/cart-service.js"></script>
     <script type="text/javascript" src="order/order-service.js"></script>
 
 
     <script type="text/javascript" src="zz_Generic/generic-controllers.js"></script>
     <script type="text/javascript" src="CRUD/crud-controller.js"></script>
     <script type="text/javascript" src="dish/dish-controller.js"></script>
+    <script type="text/javascript" src="order/cart-controller.js"></script>
     <script type="text/javascript" src="order/order-controller.js"></script>
+    <script type="text/javascript" src="order/order-detail-controller.js"></script>
 </body>
 
 </html>

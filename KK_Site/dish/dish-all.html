@@ -1,11 +1,38 @@
-<div ng-repeat="dish in dishes track by dish.id">
-	<div>
-		<h2><a href="#dish?id={{dish.id}}">{{dish.name}}</a></h2>
-		<ul>
-			<li>{{dish.description}}</li>
-			<li>{{dish.price}}</li>
-			<li>{{dish.dailyStock}}</li>
-			<li>{{dish.currentStock}}</li>
-		</ul>
-	</div>
+<div>
+	<table class="table table-bordered table-tablet">
+		<tr>
+			<td colspan="5">
+				<h2><center>List of all dishes</center></h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h2>Name</h2>
+			</td>
+			<td>
+				<h2>Description</h2>
+			</td>
+			<td>
+				<h2>Daily stock</h2>
+			</td>
+			<td>
+				<h2>Price</h2>
+			</td>
+			<td>
+				<h2>Action</h2>
+			</td>
+		</tr>
+		<tr ng-repeat="dish in dishes track by dish.id">
+			<td>
+				<a href="#dish?id={{dish.id}}" ng-bind="dish.name"></a>
+			</td>
+			<td ng-bind="dish.description"></td>
+			<td ng-bind="dish.dailyStock"></td>
+			<td ng-bind="dish.price"></td>
+			<td>
+				<a class="btn btn-info" href="#dish?id={{dish.id}}" role="button">Detail</a>
+			</td>
+		</tr>
+	</table>
+
 </div>

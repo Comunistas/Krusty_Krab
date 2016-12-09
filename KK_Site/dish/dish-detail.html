@@ -1,7 +1,38 @@
 <div>
-	<h1>{{dish.name}}</h1>
-	<h3>{{dish.description}}</h3>
-	<h3>{{dish.price}}</h3>
-	<h3>{{dish.dailyStock}}</h3>
-	<h3>{{dish.currentStock}}</h3>
+
+	<table class="table table-main-detail center">
+		<th>
+			<td>
+				<center><h1><center>Dish</center></h2>
+			</td>
+		</th>
+		<tr>
+            <td>
+               Name:
+            </td>
+            <td ng-bind="dish.name">
+            </td>
+        </tr>
+		<tr>
+            <td>
+               Description:
+            </td>
+            <td ng-bind="dish.description">
+            </td>
+        </tr>
+		<tr>
+            <td>
+               Price:
+            </td>
+            <td ng-bind="dish.price | money">
+            </td>
+        </tr>
+		<tr>
+            <td>
+               Daily stock:
+            </td>
+            <td ng-bind="dish.dailyStock">
+            </td>
+        </tr>
+	</table>
 </div>

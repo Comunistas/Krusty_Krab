@@ -25,12 +25,17 @@ var app = (function() {
             .when('/order-new', {
                 title: 'New Order',
                 templateUrl: 'order/order-register.html',
-                controller: 'orderCtrl',
+                controller: 'cartCtrl',
             })
             .when('/order-all', {
-                title: 'All orders',
+                title: 'All Orders',
                 templateUrl: 'order/order-all.html',
-                controller: 'orderAllCtrl',
+                controller: 'orderCtrl',
+            })
+            .when('/order', {
+                title: 'Order',
+                templateUrl: 'order/order-detail.html',
+                controller: 'orderDetailCtrl',
             })
             .otherwise({
                 redirectTo: '/'

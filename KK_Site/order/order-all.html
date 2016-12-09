@@ -1,0 +1,79 @@
+<div>
+    <center><h2 nf-if="msg" ng-bind="msg" class="text-success"></h2></center>
+    <br>
+    <div class="half">
+        <table class="table table-striped table-bordered table-tablet">
+            <tr class="active">
+                <td colspan="4">
+                    <h3 style="margin:0"><center>Currently attending</center></h3>
+                </td>
+            </tr>
+            <tr class="active">
+                <td>
+                    # Table
+                </td>
+                <td>
+                    Attending
+                </td>
+                <td colspan="2">
+                    Actions
+                </td>
+            </tr>
+            <tr ng-repeat="cart in carts">
+                <td ng-bind="cart.table.number">
+                </td>
+                <td ng-bind="cart.employee.name + ' ' + cart.employee.lastName">
+                </td>
+                <td>
+                    <a class="btn btn-info form-control" ng-href="#order-new?tableId={{cart.tableId}}" role="button">See</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger form-control" ng-click="deleteCartAndRefresh(cart.tableId)" role="button">Delete</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <a href="#order-new" role="button" class="btn btn-success form-control">New Order</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="half">
+        <table class="table table-striped table-bordered table-tablet">
+            <tr class="active">
+                <td colspan="5">
+                    <h3 style="margin:0"><center>Attended orders</center></h3>
+                </td>
+            </tr>
+            <tr class="active">
+                <td>
+                    # Table
+                </td>
+                <td>
+                    Attended by
+                </td>
+                <td>
+                    Date
+                </td>
+                <td>Total</td>
+                <td>
+                    Action
+                </td>
+            </tr>
+            <tr ng-repeat="order in orders">
+                <td ng-bind="order.table.number">
+                </td>
+                <td ng-bind="order.employee.name + ' ' + order.employee.lastName">
+                </td>
+                <td ng-bind="order.date | date">
+                </td>
+                <td ng-bind="order.total | money">
+                </td>
+                <td>
+                    <a class="btn btn-info form-control" ng-href="#/order?id={{order.id}}" role="button">See</a>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</div>

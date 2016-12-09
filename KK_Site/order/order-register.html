@@ -12,12 +12,12 @@
                 <input type="text" ng-disabled="!selecting" class="form-control" ng-model="tableId">
             </td>
             <td>
-                <button type="button" class="btn btn-success form-control" ng-click="selecting?setTableIdForOrder():enableSelectionForTable()">
+                <button type="button" class="btn btn-success form-control" ng-click="selecting?setTableIdForCart():enableSelectionForTable()">
                     <label ng-bind="selecting?'Select':'Select again'"></label>
                 </button>
             </td>
         </tr>
-        <tr ng-if="err"><td><label class="text-danger" ng-bind="err"></label></td></tr>
+        <tr ng-if="err"><td colspan="2"><center><label class="text-danger" ng-bind="err"></label></center></td></tr>
     </table>
 </div>
 <div class="half">
@@ -26,7 +26,7 @@
             <tr class="active">
                 <th>Dish</th>
                 <th>Price</th>
-                <th>Amount</th>
+                <th style="width:30px!important">Amount</th>
                 <th></th>
             </tr>
         </thead>
@@ -34,10 +34,10 @@
             <tr ng-repeat="dish in dishes">
                 <td ng-bind="dish.name"></td>
                 <td ng-bind="dish.price | money"></td>
-                <td><input type="text" ng-init="dish.amount=1" ng-model="dish.amount"></td>
+                <td style="width:100px!important"><input style="width:90px" class="form-control" type="text" ng-init="dish.amount=1" ng-model="dish.amount"></td>
                 <td>
                     <button ng-disabled="selecting" type="button" class="btn btn-success" ng-click="addToCart(dish)">
-                        Add to Order
+                        Add to Cart
                     </button>
                 </td>
             </tr>
@@ -63,7 +63,7 @@
                 <td style="width:240px">
                     <div class="input-group">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-danger" ng-click="removeFromOrder(dishOrder)">
+                            <button type="button" class="btn btn-danger" ng-click="removeFromCart(dishOrder)">
                                 Remove from order
                             </button>
                         </div>
@@ -77,10 +77,10 @@
             </tr>
             <tr ng-if="cart">
                 <td colspan="2">
-                    <button type="button" class="btn btn-danger form-control" ng-click="cancelOrder()">Delete the order</button>
+                    <button type="button" class="btn btn-danger form-control" ng-click="cancelCart()">Delete the order</button>
                 </td>
                 <td colspan="2">
-                    <button type="button" class="btn btn-success form-control" ng-click="saveOrder()">Save order</button>
+                    <button type="button" class="btn btn-success form-control" ng-click="saveCart()">Save order</button>
                 </td>
                 <td ng-bind="cart.subtotal | money"></td>
             </tr>

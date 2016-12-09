@@ -1,0 +1,56 @@
+<div class="center">
+
+    <table class="table-inv table-main-detail">
+        <tr>
+            <td colspan="2">
+                <h2>Information for order: <label ng-bind="order.id"></label></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+               Date:  
+            </td>
+            <td ng-bind="order.date | date">
+            </td>
+        </tr>
+        <tr>
+            <td>
+               Employee:  
+            </td>
+            <td ng-bind="order.employee.name + ' ' + order.employee.lastName">
+            </td>
+        </tr>
+        <tr>
+            <td>
+               Table attended:  
+            </td>
+            <td ng-bind="order.table.number">
+            </td>
+        </tr>
+    </table>
+    <table class="table table-bordered table-striped">
+        <tr colspan="5"><center>Dishes</center></tr>
+        <tr>
+            <td>Dish Id</td>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Amount</td>
+            <td>Subtotal</td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="dishOrder in dishOrders">
+            <td ng-bind="dishOrder.dish.id"></td>
+            <td ng-bind="dishOrder.dish.name"></td>
+            <td ng-bind="dishOrder.dish.price| money"></td>
+            <td ng-bind="dishOrder.amount"></td>
+            <td ng-bind="dishOrder.dish.price * dishOrder.amount | money"></td>
+            <td>
+                <a ng-href="#/dish?id={{dishOrder.dish.id}}" type="button" class="btn btn-info">
+                    See Detail
+                </a>
+            </td>
+            
+        </tr>
+    </table>
+
+</div>
