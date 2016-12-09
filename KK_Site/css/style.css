@@ -51,7 +51,7 @@
     border-spacing: 20px;
 }
 
-.btn-tablet {
+.btn-tablet-lg {
     height: 100px;
     font-size: 60px;
     padding: 20 10px;
@@ -60,7 +60,10 @@
 
 .half {
     float: left;
-    width: auto;
-    max-width: 49%;
-    margin: 0 15px;
+    width: 49%;
+    margin: 0 auto;
+}
+
+.table-inv {
+    border-spacing:20px;
 }

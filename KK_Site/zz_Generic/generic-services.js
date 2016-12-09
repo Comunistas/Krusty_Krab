@@ -23,6 +23,7 @@ app.factory('CurrentUserService', [function() {
 
     return {
         getUser: function() { return user },
+        getEmployeeId: function(){ return user.employee.id },
         setUser: function(newUser) { user = newUser },
         getRole: function() { return user.userType }
     }

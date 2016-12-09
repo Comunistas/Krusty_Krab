@@ -1,15 +1,29 @@
 (function(app) {
-    app.factory('OrderService', ['$resource', 'ServiceUrl',
+    app.factory('OrderService', ['$resource', 'ServiceUrl', 'CurrentUserService',
 
-        function($resource, ServiceUrl) {
+        function($resource, ServiceUrl, CurrentUserService) {
 
-            var temporalResource = $resource(ServiceUrl + 'order/:id')
-            var resource
+            var url = ServiceUrl+'v1/order/'
 
-            var saveDishForOrder = function() {
+            return {
+                createOrder: function(tableId, callback){
+                    var resource =  $resource(url+"new/:tableId/:employeeId", 
+                    {tableId:tableId,employeeId:CurrentUserService.getEmployeeId()})
+                    return resource.get({}, callback);
+                },
+                
+                addDishToOrder: function(dish, tableId, callback){
+                    return $resource(url+"add-dish/:tableId").save({}, dish, callback)
+                },
+                
+                saveOrder: function(tableId) {
+                    return $resource(url+"save/:tableId").get({},callback)
+                },
 
-            }
-            return null;
+                deleteOrder: function(tableId){
+                    return $resource(url+"delete/:tableId").query({},callback)
+                }
+            };
         }
     ])
 })(app)

@@ -57,7 +57,11 @@
 
     app.controller('loginCtrl', ['$scope', '$location', 'LoginService', 'CurrentUserService', '$rootScope',
         function($scope, $location, LoginService, CurrentUserService, $rootScope) {
-            document.getElementById('txtUser').focus();
+            
+            $scope.$on('$viewContentLoaded', () => {
+                document.getElementById('txtUser').focus();
+            })
+
             $scope.user = {}
             $scope.err = $location.search().err
             var user = $scope.user
@@ -65,6 +69,7 @@
             var err = "Error logging in."
 
             var success = function(userResponse) {
+                console.log(userResponse)
                 if (userResponse.authenticated) {
                     var user = userResponse.user
                     user.authenticated = true
@@ -76,13 +81,13 @@
 
                     $location.path('/home')
                 } else {
-                    $rootScope.authenticated = true
-                    $location.path('/').search({ err: err })
+                    $rootScope.authenticated = false
+                    $scope.err = err
                 }
             }
 
             var error = function(data) {
-                $location.path('/').search({ err: err })
+                $scope.err = err
             }
 
             var logOut = function() {
@@ -115,7 +120,7 @@
                     goHome()
                 }
             })
-
+            
             function goHome() {
                 $location.path('/')
             }

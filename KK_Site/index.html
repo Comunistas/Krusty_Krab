@@ -20,7 +20,7 @@
 
             <div ng-show="$root.role==='a'">
                 <ul class="nav navbar-nav">
-                    <li ng-class="{active: pages.a_home}" ng-click="setActive('a_home')"><a href="#/home">Home</a></li>
+                    <li ng-class="{active: pages.a_home}" ng-click="setActive('a_home')"><a href="#home">Home</a></li>
                     <li ng-class="{active: pages.a_dishes}" ng-click="setActive('a_dishes')"><a href="#dishes">Dishes</a></li>
                     <li ng-class="{active: pages.a_dish_input}" ng-click="setActive('a_dish_input')"><a href="#contact">Inputs</a></li>
                     <li ng-class="{active: pages.a_buy_order}" ng-click="setActive('a_buy_order')"><a href="#contact">Buy Order</a></li>
@@ -31,7 +31,7 @@
 
             <div ng-show="$root.role==='m'">
                 <ul class="nav navbar-nav">
-                    <li ng-class="{active: pages.m_home}" ng-click="setActive('m_home')"><a href="#">Home</a></li>
+                    <li ng-class="{active: pages.m_home}" ng-click="setActive('m_home')"><a href="#home">Home</a></li>
                     <li ng-class="{active: pages.m_about}" ng-click="setActive('m_about')"><a href="#dishes">Dishes</a></li>
                     <li ng-class="{active: pages.m_contact}" ng-click="setActive('m_contact')"><a href="#orders">Orders</a></li>
                 </ul>
@@ -42,7 +42,7 @@
         </nav>
 
         <div class="content">
-            <ng-view class="center"></ng-view>
+            <ng-view class="center" ng-if="$root.authenticated"></ng-view>
             <div ng-controller="loginCtrl" ng-if="!$root.authenticated">
                 <form class="jumbotron login-sht center-h">
                     <h3>
@@ -78,13 +78,20 @@
 
     <script type="text/javascript" src="js/ui-bootstrap-tpls-2.2.0.min.js"></script>
     <script type="text/javascript" src="zz_Generic/app.js"></script>
+    
+    <script type="text/javascript" src="zz_Generic/generic-filters.js"></script>
+
 
     <script type="text/javascript" src="zz_Generic/generic-services.js"></script>
+    <script type="text/javascript" src="CRUD/crud-service.js"></script>
     <script type="text/javascript" src="dish/dish-service.js"></script>
+    <script type="text/javascript" src="order/order-service.js"></script>
 
 
     <script type="text/javascript" src="zz_Generic/generic-controllers.js"></script>
+    <script type="text/javascript" src="CRUD/crud-controller.js"></script>
     <script type="text/javascript" src="dish/dish-controller.js"></script>
+    <script type="text/javascript" src="order/order-controller.js"></script>
 </body>
 
 </html>

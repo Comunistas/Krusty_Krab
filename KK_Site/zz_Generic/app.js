@@ -22,6 +22,11 @@ var app = (function() {
                 templateUrl: 'dish/dish-detail.html',
                 controller: 'dishCtrl',
             })
+            .when('/order-new', {
+                title: 'New Order',
+                templateUrl: 'order/order-register.html',
+                controller: 'orderCtrl',
+            })
             .otherwise({
                 redirectTo: '/'
             })

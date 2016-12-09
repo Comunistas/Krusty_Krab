@@ -1,0 +1,51 @@
+<div class="half">
+    <table class="table-inv">
+        <tr>
+            <td colspan="2">
+                <center>
+                    <h3 style="margin-top:7px">Register a new order.</h3>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" ng-disabled="!newOrder" class="form-control" ng-model="tableId">
+            </td>
+            <td>
+                <button type="button" ng-disabled="!newOrder" class="btn btn-success form-control" ng-click="setTableIdForNewOrder()">
+                    <label ng-bind="newOrder?'Create':'Created'"></label>
+                </button>
+            </td>
+        </tr>
+        <tr ng-if="err"><td><label class="text-danger" ng-bind="err"></label></td></tr>
+    </table>
+</div>
+<div class="half">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="active">
+                <th>Dish</th>
+                <th>Price</th>
+                <th>&9745;</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="dish in dishes">
+            <tr ng-click="addDishToOrder(dish.id)">
+                <td ng-bind="dish.name"></td>
+                <td ng-bind="dish.price | money"></td>
+                <td>
+                    <button type="button" class="btn btn-success" ng-click="addToCart(dish)">
+                        Add to Order
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <table class="table table-bordered table-tablet">
+
+    </table>
+
+</div>
