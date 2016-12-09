@@ -33,41 +33,40 @@ public class KrustyKrabOrderRestController {
 	
 	
 	@GetMapping(path="/new/{tableId}/{employeeId}")
-	public ResponseEntity<SuccessResponse> createModifiableOrder(@PathVariable("tableId")long tableId,
-	                                                             @PathVariable("employeeId")long employeeId){		
+	public ResponseEntity<SuccessResponse> createModifiableOrder(@PathVariable("tableId")Long tableId,
+	                                                             @PathVariable("employeeId")Long employeeId){		
 		return ResponseEntity.ok(new SuccessResponse(shoppingCartUtil.createANewOrder(tableId, employeeId)));
 	}
 	
 	@PostMapping(path="/add-dish/{tableId}")
 	public ResponseEntity<ShoppingCartResponse> addDishesToOrder(@RequestBody Dish dish,
-	                                             @PathParam("tableId")long tableId,
-	                                             @RequestParam("amount")int amount){
-		if(amount==0) amount = 1;
+	                                             @PathParam("tableId")Long tableId,
+	                                             @RequestParam("amount")Integer amount){
 		return ResponseEntity.ok(shoppingCartUtil.addDishesToOrder(tableId, dish, amount));
 	}
 	
 	@GetMapping(path="/remove-dish/{tableId}/{dishId}")
-	public ResponseEntity<SuccessResponse> removeDishesFromOrder(@PathParam("tableId")long tableId,
-	                                                           @PathParam("dishId")long dishId,
-	                                                           @RequestParam("amount")int amount){
-		shoppingCartUtil.removeDish(tableId, dishId);
+	public ResponseEntity<SuccessResponse> removeDishesFromOrder(@PathParam("tableId")Long tableId,
+	                                                           @PathParam("dishId")Long dishId,
+	                                                           @RequestParam("amount")Integer amount){
+		shoppingCartUtil.removeDishesFromOrder(tableId, dishId, amount);
 		return ResponseEntity.ok(new SuccessResponse());
 	}
 
 	
 	@GetMapping(path="/save/{tableId}")
-	public ResponseEntity<String> saveOrder(@PathParam("tableId")long tableId) {
+	public ResponseEntity<String> saveOrder(@PathParam("tableId")Long tableId) {
 		shoppingCartUtil.saveOrder(tableId);
 		return ResponseEntity.ok("Order saved.");
 	}	
 	
 	@GetMapping(path="/delete/{tableId}")
-	public ResponseEntity<List<ShoppingCartResponse>> deleteOrder(@PathParam("tableId")long tableId) {
+	public ResponseEntity<List<ShoppingCartResponse>> deleteOrder(@PathParam("tableId")Long tableId) {
 		return ResponseEntity.ok(shoppingCartUtil.deleteOrder(tableId));
 	}	
 
 	@GetMapping(path="/cart/{tableId}")
-	public ResponseEntity<ShoppingCartResponse> getCart (@PathParam("tableId")long tableId){
+	public ResponseEntity<ShoppingCartResponse> getCart (@PathParam("tableId")Long tableId){
 		return ResponseEntity.ok(shoppingCartUtil.currentShoppingCart(tableId));
 	}
 	

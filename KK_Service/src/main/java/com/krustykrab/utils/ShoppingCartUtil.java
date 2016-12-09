@@ -38,7 +38,7 @@ public class ShoppingCartUtil
 	 */
 	private static Map<Long, ShoppingCartResponse> ORDER_CACHE = new HashMap<Long,ShoppingCartResponse>();
 	
-	public boolean createANewOrder(long tableId, long employeeId){
+	public boolean createANewOrder(Long tableId, Long employeeId){
 		ShoppingCartResponse cart = new ShoppingCartResponse();
 		cart.setTableId(tableId);
 		cart.setEmployeeId(employeeId);
@@ -50,7 +50,7 @@ public class ShoppingCartUtil
 		return true;
 	}
 	
-	public ShoppingCartResponse addDishesToOrder(long tableId, Dish dish, int amount){
+	public ShoppingCartResponse addDishesToOrder(Long tableId, Dish dish, Integer amount){
 		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
 		
 		if(amount>1){
@@ -63,7 +63,7 @@ public class ShoppingCartUtil
 	}
 	
 	@Transactional
-	public void saveOrder(long tableId){
+	public void saveOrder(Long tableId){
 		ShoppingCartResponse cart = ORDER_CACHE.remove(tableId);
 		Order order = new Order();
 		Employee employee = new Employee();
@@ -84,17 +84,20 @@ public class ShoppingCartUtil
 		dishOrderService.saveAll(detail);
 	}
 	
-	public ShoppingCartResponse currentShoppingCart(long tableId){
+	public ShoppingCartResponse currentShoppingCart(Long tableId){
 		return ORDER_CACHE.get(tableId);
 	}
 	
-	public List<ShoppingCartResponse> deleteOrder(long tableId){
+	public List<ShoppingCartResponse> deleteOrder(Long tableId){
 		ORDER_CACHE.remove(tableId);
 		return (List<ShoppingCartResponse>)ORDER_CACHE.values();
 	}
 	
-	public void removeDishesFromOrder(long tableId, long dishId, int amount){
+	public void removeDishesFromOrder(Long tableId, Long dishId, Integer amount){
 		ShoppingCartResponse shoppingCart = ORDER_CACHE.get(tableId);
+		
+		if(amount==null)return;
+		
 		if(amount>1){
 			shoppingCart.removeDishesFromCart(dishId, amount);
 		}else if (amount==1){
