@@ -50,17 +50,15 @@ public class ShoppingCartUtil
 		return true;
 	}
 	
-	public ShoppingCartResponse addDishToOrder(long tableId, Dish dish){
-		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
-		cart.addDishToCart(dish);
-		return cart;
-	}
-	
 	public ShoppingCartResponse addDishesToOrder(long tableId, Dish dish, int amount){
 		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
-		for(int i = 0; i<amount; i++){
+		
+		if(amount>1){
+			cart.addDishesToCart(dish, amount);
+		}else if(amount==1){
 			cart.addDishToCart(dish);
 		}
+
 		return cart;
 	}
 	
@@ -77,11 +75,9 @@ public class ShoppingCartUtil
 		
 		order = orderService.saveEntity(order);
 		
-		List<Dish_Order> detail = new ArrayList<Dish_Order>();
+		List<Dish_Order> detail = cart.getDishes();
 				
-		for(Dish dish : cart.getDishes()){
-			Dish_Order dishOrder = new Dish_Order();
-			dishOrder.setDish(dish);
+		for(Dish_Order dishOrder : cart.getDishes()){
 			dishOrder.setOrder(order);
 		}
 		
@@ -97,8 +93,14 @@ public class ShoppingCartUtil
 		return (List<ShoppingCartResponse>)ORDER_CACHE.values();
 	}
 	
-	public void removeDish(long tableId, long dishId){
-		ORDER_CACHE.get(tableId).removeDishFromCart(dishId);
+	public void removeDishesFromOrder(long tableId, long dishId, int amount){
+		ShoppingCartResponse shoppingCart = ORDER_CACHE.get(tableId);
+		if(amount>1){
+			shoppingCart.removeDishesFromCart(dishId, amount);
+		}else if (amount==1){
+			shoppingCart.removeDishFromCart(dishId);
+		}
 	}
+	
 	
 }

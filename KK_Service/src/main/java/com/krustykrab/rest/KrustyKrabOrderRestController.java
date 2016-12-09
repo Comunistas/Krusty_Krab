@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.krustykrab.model.ShoppingCartResponse;
@@ -38,24 +39,21 @@ public class KrustyKrabOrderRestController {
 	}
 	
 	@PostMapping(path="/add-dish/{tableId}")
-	public ResponseEntity<ShoppingCartResponse> addDishToOrder(@RequestBody Dish dish,
-	                                             @PathParam("tableId")long tableId){
-		return ResponseEntity.ok(shoppingCartUtil.addDishToOrder(tableId, dish));
-	}
-	
-	@PostMapping(path="/add-dish/{tableId}/{amount}")
 	public ResponseEntity<ShoppingCartResponse> addDishesToOrder(@RequestBody Dish dish,
-	                                                             @PathParam("tableId")long tableId,
-	                                                             @PathParam("amount")int amount){
-		return ResponseEntity.ok(shoppingCartUtil.addDishToOrder(tableId, dish));
+	                                             @PathParam("tableId")long tableId,
+	                                             @RequestParam("amount")int amount){
+		if(amount==0) amount = 1;
+		return ResponseEntity.ok(shoppingCartUtil.addDishesToOrder(tableId, dish, amount));
 	}
 	
 	@GetMapping(path="/remove-dish/{tableId}/{dishId}")
-	public ResponseEntity<SuccessResponse> removeDishFromOrder(@PathParam("tableId")long tableId,
-	                                                           @PathParam("dishId")long dishId){
+	public ResponseEntity<SuccessResponse> removeDishesFromOrder(@PathParam("tableId")long tableId,
+	                                                           @PathParam("dishId")long dishId,
+	                                                           @RequestParam("amount")int amount){
 		shoppingCartUtil.removeDish(tableId, dishId);
 		return ResponseEntity.ok(new SuccessResponse());
 	}
+
 	
 	@GetMapping(path="/save/{tableId}")
 	public ResponseEntity<String> saveOrder(@PathParam("tableId")long tableId) {
