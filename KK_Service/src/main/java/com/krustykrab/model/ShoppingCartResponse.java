@@ -26,9 +26,12 @@ public class ShoppingCartResponse
 	private List<Dish_Order> dishes;
 	private double subtotal;
 	
+	{
+		dishes = new ArrayList<Dish_Order>();
+	}
+	
 	public ShoppingCartResponse(long tableId){
 		this.tableId = tableId;
-		dishes = new ArrayList<Dish_Order>();
 	}
 	
 	public void addDishToCart(Dish dish){
@@ -40,16 +43,21 @@ public class ShoppingCartResponse
 	}
 	
 	private void addDishesWithAmount(Dish dish, int amount){
-		
+		Dish_Order dishOrder;
 		if(hasDish(dish.getId())){
-			Dish_Order dishOrder = getDishById(dish.getId());
+			dishOrder = getDishById(dish.getId());
 			dishOrder.setAmount(dishOrder.getAmount()+amount);
+		}else{
+			dishOrder = new Dish_Order();
+			dishOrder.setDish(dish);
+			dishOrder.setAmount(amount);
 		}
 		
 	}
 	
 	private void removeDishesWithAmount(long dishId, int amount){
 		if(hasDish(dishId)){
+			
 			Dish_Order dishOrder = getDishById(dishId);
 			
 			int allAmount = dishOrder.getAmount();

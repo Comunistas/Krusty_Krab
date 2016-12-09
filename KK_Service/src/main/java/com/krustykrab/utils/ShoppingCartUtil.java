@@ -39,20 +39,20 @@ public class ShoppingCartUtil
 	private static Map<Long, ShoppingCartResponse> ORDER_CACHE = new HashMap<Long,ShoppingCartResponse>();
 	
 	public boolean createANewOrder(Long tableId, Long employeeId){
+		if(ORDER_CACHE.containsKey(tableId)) return false;
+		
 		ShoppingCartResponse cart = new ShoppingCartResponse();
 		cart.setTableId(tableId);
 		cart.setEmployeeId(employeeId);
-		
-		if(ORDER_CACHE.containsKey(tableId)) return false;
-		
+
 		ORDER_CACHE.put(tableId, cart);
-		
+				
 		return true;
 	}
 	
 	public ShoppingCartResponse addDishesToOrder(Long tableId, Dish dish, Integer amount){
 		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
-		
+
 		if(amount>1){
 			cart.addDishesToCart(dish, amount);
 		}else if(amount==1){
