@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.krustykrab.model.dao.Dish_OrderDAO;
 import com.krustykrab.model.entities.Dish_Order;
+import com.krustykrab.model.entities.Order;
 import com.krustykrab.service.KrustyKrabCrudService;
 
 @Service
@@ -16,6 +17,10 @@ public class KrustyKrabDish_OrderServiceImpl implements KrustyKrabCrudService<Di
 	@Override
 	public List<Dish_Order> getEntities() {
 		return (List<Dish_Order>) dao.findAll();
+	}
+	
+	public List<Dish_Order> getAllByOrder(Order order){
+		return (List<Dish_Order>)dao.findByOrder(order);
 	}
 	
 	public List<Dish_Order> saveAll(List<Dish_Order> dishesPerOrder){

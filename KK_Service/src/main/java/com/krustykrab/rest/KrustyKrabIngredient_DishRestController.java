@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.krustykrab.model.entities.Ingredient_Dish;
 import com.krustykrab.service.impl.KrustyKrabIngredient_DishServiceImpl;
 
+@RestController
 @RequestMapping(path = "v1/ingredients_dishes")
 public class KrustyKrabIngredient_DishRestController {
 	@Autowired KrustyKrabIngredient_DishServiceImpl service;

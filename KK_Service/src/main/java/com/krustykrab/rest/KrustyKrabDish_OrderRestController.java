@@ -11,22 +11,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.krustykrab.model.entities.Dish_Order;
+import com.krustykrab.model.entities.Order;
 import com.krustykrab.service.impl.KrustyKrabDish_OrderServiceImpl;
 import com.krustykrab.utils.CommonConstants;
 
-@RequestMapping(path = "v1/dishes_orders")
+@RestController
+@RequestMapping(path = "v1/dishes-orders")
 public class KrustyKrabDish_OrderRestController {
 	
 	@Autowired
 	private KrustyKrabDish_OrderServiceImpl crudService;
 	
 	@GetMapping(value = CommonConstants.ID)
-    public ResponseEntity<Dish_Order> getDish_Order(@PathVariable Long id) {
-		Dish_Order Dish_Order = crudService.getEntity(id);
-		ResponseEntity<Dish_Order> responseEntity = new ResponseEntity<Dish_Order>(Dish_Order, HttpStatus.OK);
-        return responseEntity;
+    public ResponseEntity<List<Dish_Order>> getDish_Order(@PathVariable Long id) {
+		Order order = new Order();
+		order.setId(id);
+		
+        return ResponseEntity.ok(crudService.getAllByOrder(order));
     }
 	
 	

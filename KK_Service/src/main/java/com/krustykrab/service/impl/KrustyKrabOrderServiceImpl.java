@@ -1,5 +1,6 @@
 package com.krustykrab.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,11 @@ public class KrustyKrabOrderServiceImpl implements KrustyKrabCrudService<Order> 
 	
 	@Override
 	public List<Order> getEntities() {
-		return (List<Order>) dao.findAll();
+		
+		Iterable<Order> orders = dao.findAll();
+		orders.forEach(order->order.setTotal(dao.getTotalForOrder(order.getId())));
+		
+		return (List<Order>) orders;
 	}
 	
 	@Override

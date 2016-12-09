@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.krustykrab.model.entities.PurchaseOrder;
 import com.krustykrab.service.impl.KrustyKrabPurchaseOrderServiceImpl;
 import com.krustykrab.utils.CommonConstants;
 
+@RestController
 @RequestMapping(path = "v1/purchaseorders")
 public class KrustyKrabPurchaseOrderRestController {
 	@Autowired

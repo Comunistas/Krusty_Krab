@@ -85,8 +85,9 @@ public class KrustyKrabOrderRestController {
 	
 	@GetMapping()
     public ResponseEntity<List<Order>> getOrders() {
-		List<Order> Orders = crudService.getEntities();
-		ResponseEntity<List<Order>> responseEntity = new ResponseEntity<List<Order>>(Orders, HttpStatus.OK);
+		List<Order> orders = crudService.getEntities();
+		
+		ResponseEntity<List<Order>> responseEntity = new ResponseEntity<List<Order>>(orders, HttpStatus.OK);
         return responseEntity;
     }
 	
