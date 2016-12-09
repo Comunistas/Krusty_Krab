@@ -67,7 +67,7 @@ public class KrustyKrabOrderRestController {
 
 	@GetMapping(path="/cart/{tableId}")
 	public ResponseEntity<ShoppingCartResponse> getCart (@PathVariable("tableId")Long tableId){
-		return ResponseEntity.ok(shoppingCartUtil.currentShoppingCart(tableId));
+		return ResponseEntity.ok(shoppingCartUtil.getShoppingCartForTable(tableId));
 	}
 	
 	@GetMapping(path="/cart/all")

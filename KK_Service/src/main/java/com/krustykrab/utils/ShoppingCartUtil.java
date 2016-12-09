@@ -51,6 +51,7 @@ public class ShoppingCartUtil
 		cart.setEmployee(employeeService.getEntity(employeeId));
 		cart.setTable(tableService.getEntity(tableId));
 
+		if(cart.getEmployee()==null || cart.getTable()==null) return false;
 		ORDER_CACHE.put(tableId, cart);
 				
 		return true;
@@ -104,7 +105,7 @@ public class ShoppingCartUtil
 		dishOrderService.saveAll(detail);
 	}
 	
-	public ShoppingCartResponse currentShoppingCart(Long tableId){
+	public ShoppingCartResponse getShoppingCartForTable(Long tableId){
 		return ORDER_CACHE.get(tableId);
 	}
 	
