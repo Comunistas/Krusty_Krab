@@ -55,9 +55,9 @@ public class KrustyKrabOrderRestController {
 
 	
 	@GetMapping(path="/save/{tableId}")
-	public ResponseEntity<String> saveOrder(@PathVariable("tableId")Long tableId) {
+	public ResponseEntity<SuccessResponse> saveOrder(@PathVariable("tableId")Long tableId) {
 		shoppingCartUtil.saveOrder(tableId);
-		return ResponseEntity.ok("Order saved.");
+		return ResponseEntity.ok(new SuccessResponse());
 	}	
 	
 	@GetMapping(path="/delete/{tableId}")
