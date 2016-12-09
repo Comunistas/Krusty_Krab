@@ -1,8 +1,7 @@
 package com.krustykrab.rest;
 
+import java.util.Collection;
 import java.util.List;
-
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,11 +47,10 @@ public class KrustyKrabOrderRestController {
 	}
 	
 	@GetMapping(path="/remove-dish/{tableId}/{dishId}")
-	public ResponseEntity<SuccessResponse> removeDishesFromOrder(@PathVariable("tableId")Long tableId,
+	public ResponseEntity<ShoppingCartResponse> removeDishesFromOrder(@PathVariable("tableId")Long tableId,
 	                                                           @PathVariable("dishId")Long dishId,
 	                                                           @RequestParam("amount")Integer amount){
-		shoppingCartUtil.removeDishesFromOrder(tableId, dishId, amount);
-		return ResponseEntity.ok(new SuccessResponse());
+		return ResponseEntity.ok(shoppingCartUtil.removeDishesFromOrder(tableId, dishId, amount));
 	}
 
 	
@@ -63,7 +61,7 @@ public class KrustyKrabOrderRestController {
 	}	
 	
 	@GetMapping(path="/delete/{tableId}")
-	public ResponseEntity<List<ShoppingCartResponse>> deleteOrder(@PathVariable("tableId")Long tableId) {
+	public ResponseEntity<Collection<ShoppingCartResponse>> deleteOrder(@PathVariable("tableId")Long tableId) {
 		return ResponseEntity.ok(shoppingCartUtil.deleteOrder(tableId));
 	}	
 

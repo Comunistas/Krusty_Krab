@@ -3,7 +3,7 @@
  */
 package com.krustykrab.utils;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -88,21 +88,23 @@ public class ShoppingCartUtil
 		return ORDER_CACHE.get(tableId);
 	}
 	
-	public List<ShoppingCartResponse> deleteOrder(Long tableId){
+	public Collection<ShoppingCartResponse> deleteOrder(Long tableId){
 		ORDER_CACHE.remove(tableId);
-		return (List<ShoppingCartResponse>)ORDER_CACHE.values();
+		return ORDER_CACHE.values();
 	}
 	
-	public void removeDishesFromOrder(Long tableId, Long dishId, Integer amount){
-		ShoppingCartResponse shoppingCart = ORDER_CACHE.get(tableId);
+	public ShoppingCartResponse removeDishesFromOrder(Long tableId, Long dishId, Integer amount){
+		ShoppingCartResponse cart = ORDER_CACHE.get(tableId);
 		
-		if(amount==null)return;
+		if(amount==null)return null;
 		
 		if(amount>1){
-			shoppingCart.removeDishesFromCart(dishId, amount);
+			cart.removeDishesFromCart(dishId, amount);
 		}else if (amount==1){
-			shoppingCart.removeDishFromCart(dishId);
+			cart.removeDishFromCart(dishId);
 		}
+		
+		return cart;
 	}
 	
 	

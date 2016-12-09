@@ -3,6 +3,7 @@
  */
 package com.krustykrab.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -19,8 +20,12 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class ShoppingCartResponse
+public class ShoppingCartResponse implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4908305060643088971L;
 	private long tableId;
 	private long employeeId;
 	private List<Dish_Order> dishes;
@@ -51,8 +56,9 @@ public class ShoppingCartResponse
 			dishOrder = new Dish_Order();
 			dishOrder.setDish(dish);
 			dishOrder.setAmount(amount);
+			dishes.add(dishOrder);
 		}
-		
+		calcSubtotal();
 	}
 	
 	private void removeDishesWithAmount(long dishId, int amount){
@@ -68,7 +74,7 @@ public class ShoppingCartResponse
 				dishes.removeIf(item -> item.getDish().getId().equals(dishId));
 			}
 		}
-		
+		calcSubtotal();	
 	}
 	
 	private boolean hasDish(long dishId){
@@ -92,6 +98,11 @@ public class ShoppingCartResponse
 	
 	public void removeDishesFromCart(long dishId, int amount){
 		removeDishesWithAmount(dishId, amount);
+	}
+	
+	private void calcSubtotal(){
+		subtotal = 0;
+		dishes.forEach(dishOrder -> subtotal+=(dishOrder.getDish().getPrice()*dishOrder.getAmount()));
 	}
 	
 }
