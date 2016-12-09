@@ -1,10 +1,10 @@
 package com.krustykrab.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +18,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.krustykrab.model.ShoppingCartResponse;
 import com.krustykrab.model.entities.Dish;
+import com.krustykrab.model.entities.Dish_Order;
+import com.krustykrab.model.entities.Order;
 import com.krustykrab.service.impl.KrustyKrabDishServiceImpl;
+import com.krustykrab.service.impl.KrustyKrabDish_OrderServiceImpl;
 import com.krustykrab.service.impl.KrustyKrabOrderServiceImpl;
 import com.krustykrab.utils.ShoppingCartUtil;
 
@@ -30,6 +33,7 @@ public class ShoppingCartTestCase {
 	@Autowired ShoppingCartUtil shoppingCartUtil;
 	@Autowired KrustyKrabDishServiceImpl dishService;
 	@Autowired KrustyKrabOrderServiceImpl orderService;
+	@Autowired KrustyKrabDish_OrderServiceImpl dishOrderService;
 	
 	long tableId = 1L;
 	long firstDishId = 1L;
@@ -51,7 +55,7 @@ public class ShoppingCartTestCase {
 		shoppingCartUtil.deleteOrder(1L);
 	}
 	
-	private void addTwoCarts() {
+	private void addTwoDishesToCart() {
 		Dish dish1 = dishService.getEntity(firstDishId);
 		Dish dish2 = dishService.getEntity(secondDishId);
 		
@@ -76,7 +80,7 @@ public class ShoppingCartTestCase {
 	@Test
 	public void test_02_AddDishesToOrder() {
 		
-		addTwoCarts();
+		addTwoDishesToCart();
 		
 		ShoppingCartResponse cart = shoppingCartUtil.getShoppingCartForTable(tableId);
 		
@@ -94,7 +98,7 @@ public class ShoppingCartTestCase {
 	@Test
 	public void test_03_RemoveDishesToOrder() {
 		
-		addTwoCarts();
+		addTwoDishesToCart();
 		
 		ShoppingCartResponse cart;
 		
@@ -126,7 +130,7 @@ public class ShoppingCartTestCase {
 	}
 	
 	/**
-	 * 
+	 * Test that there's no repeated cart for a single table.
 	 */
 	@Test
 	public void test_05_RepeatedCart(){
@@ -138,8 +142,29 @@ public class ShoppingCartTestCase {
 	}
 	
 	
+	/**
+	 * Check that the order is being saved succefully and saved to the database, as well as it's detail.
+	 */
 	@Test
 	public void test_06_SaveCart() {
+		addTwoDishesToCart();
+		shoppingCartUtil.saveOrder(tableId);
+		
+		assertTrue(shoppingCartUtil.getAllCarts().isEmpty());
+		
+		Order order = orderService.getEntity(1L);
+		
+		assertNotNull(order);
+		
+		assertTrue(order.getEmployee().getId() == 1L);
+		
+		List<Dish_Order> dishOrders = dishOrderService.getAllByOrder(order);
+		
+		Dish_Order dishOrder1 = dishOrders.stream().filter(dishOrder -> dishOrder.getDish().getId()==firstDishId).findFirst().get();
+		Dish_Order dishOrder2 = dishOrders.stream().filter(dishOrder -> dishOrder.getDish().getId()==secondDishId).findFirst().get();
+		
+		assertEquals(5, dishOrder1.getAmount());
+		assertEquals(2, dishOrder2.getAmount());
 		
 	}
 }
