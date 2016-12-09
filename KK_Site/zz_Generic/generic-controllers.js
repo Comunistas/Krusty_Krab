@@ -69,7 +69,6 @@
             var err = "Error logging in."
 
             var success = function(userResponse) {
-                console.log(userResponse)
                 if (userResponse.authenticated) {
                     var user = userResponse.user
                     user.authenticated = true

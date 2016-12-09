@@ -46,9 +46,18 @@
     border-radius: 2px;
 }
 
-.table-tablet {
+.table-tablet-lg, .table-tablet, .table-inv{
+    margin: 0 auto;
+}
+
+.table-tablet-lg {
     width: 600px;
-    border-spacing: 20px;
+}
+
+.table-tablet input, .table-tablet button {
+    margin:10px;
+    height:35px;
+    font-size: 15px;
 }
 
 .btn-tablet-lg {
@@ -61,9 +70,10 @@
 .half {
     float: left;
     width: 49%;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .table-inv {
-    border-spacing:20px;
+    border-collapse: separate;
+    border-spacing: 20px;
 }

@@ -27,6 +27,11 @@ var app = (function() {
                 templateUrl: 'order/order-register.html',
                 controller: 'orderCtrl',
             })
+            .when('/order-all', {
+                title: 'All orders',
+                templateUrl: 'order/order-all.html',
+                controller: 'orderAllCtrl',
+            })
             .otherwise({
                 redirectTo: '/'
             })

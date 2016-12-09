@@ -8,20 +8,28 @@
             return {
                 createOrder: function(tableId, callback){
                     var resource =  $resource(url+"new/:tableId/:employeeId", 
-                    {tableId:tableId,employeeId:CurrentUserService.getEmployeeId()})
-                    return resource.get({}, callback);
+                    {employeeId:CurrentUserService.getEmployeeId()})
+                    return resource.get({tableId}, callback);
                 },
                 
-                addDishToOrder: function(dish, tableId, callback){
-                    return $resource(url+"add-dish/:tableId").save({}, dish, callback)
-                },
-                
-                saveOrder: function(tableId) {
-                    return $resource(url+"save/:tableId").get({},callback)
+                addDishToOrder: function(tableId, dish, amount, callback){
+                    return $resource(url+"add-dish/:tableId").save({tableId:tableId,amount:amount}, dish, callback)
                 },
 
-                deleteOrder: function(tableId){
-                    return $resource(url+"delete/:tableId").query({},callback)
+                removeDishFromOrder: function(tableId, dishId, amount, callback){
+                    return $resource(url+"remove-dish/:tableId/:dishId").get({tableId:tableId, dishId:dishId, amount:amount}, callback)
+                },
+                
+                saveOrder: function(tableId,callback) {
+                    return $resource(url+"save/:tableId").get({tableId:tableId}, callback)
+                },
+
+                deleteOrder: function(tableId,callback){
+                    return $resource(url+"delete/:tableId").query({tableId:tableId}, callback)
+                },
+
+                getOrderForTable: function(tableId,callback){
+                    return $resource(url+"cart/:tableId").get({tableId:tableId})
                 }
             };
         }
